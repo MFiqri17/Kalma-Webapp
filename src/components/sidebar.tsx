@@ -12,7 +12,6 @@ import { useSidebarStore } from '../modules/store'
 export default function Sidebar({ menuList }: { menuList: SidebarMenu[] }) {
 	const { isOpen, toggleSidebar, setIsOpen } = useSidebarStore()
 	const isMobile = useMediaMatch('(max-width: 640px)')
-
 	const t = useTranslations('GENERAL.SIDEBAR')
 
 	useEffect(() => {
