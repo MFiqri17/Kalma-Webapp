@@ -2,17 +2,18 @@ import { Sidebar as ProSidebar, Menu, MenuItem, sidebarClasses } from 'react-pro
 import { capitalCase } from 'text-case'
 import Image from 'next/image'
 import clsx from 'clsx'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 import { useMediaMatch } from 'rooks'
 import { Link } from '../navigation'
 import { SidebarMenu } from '../modules/types'
 import { useSidebarStore } from '../modules/store'
+import { Locale } from '../modules/config/i18n'
 
 export default function Sidebar({ menuList }: { menuList: SidebarMenu[] }) {
 	const { isOpen, toggleSidebar, setIsOpen } = useSidebarStore()
 	const isMobile = useMediaMatch('(max-width: 640px)')
-
+	const locale = useLocale()
 	const t = useTranslations('GENERAL.SIDEBAR')
 
 	useEffect(() => {
@@ -66,7 +67,7 @@ export default function Sidebar({ menuList }: { menuList: SidebarMenu[] }) {
 							<MenuItem
 								key={menu.id}
 								className="text-base font-medium text-gray-800"
-								component={<Link href={menu.url_path} />}
+								component={<Link href={menu.url_path} locale={locale as Locale} />}
 								icon={menu.icon}
 							>
 								{capitalCase(t(menu.label_path))}
