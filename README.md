@@ -1,13 +1,16 @@
-# Next.js & NextUI Template
+# Kalma Web App
 
-This is a template for creating applications using Next.js 14 (app directory) and NextUI (v2).
-
-[Try it on CodeSandbox](https://githubbox.com/nextui-org/next-app-template)
+This repo is for our thesis purpose. Making mental healt admin management.
 
 ## Technologies Used
 
 - [Next.js 14](https://nextjs.org/docs/getting-started)
 - [NextUI v2](https://nextui.org/)
+- [Tanstack Query](https://tanstack.com/)
+- [Axios](https://axios-http.com/)
+- [Zustand](https://zustand-demo.pmnd.rs/)
+- [Hook Form](https://react-hook-form.com/)
+- [Zod](https://zod.dev/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Tailwind Variants](https://tailwind-variants.org)
 - [TypeScript](https://www.typescriptlang.org/)
@@ -16,38 +19,11 @@ This is a template for creating applications using Next.js 14 (app directory) an
 
 ## How to Use
 
-### Use the template with create-next-app
-
-To create a new project based on this template using `create-next-app`, run the following command:
-
-```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
-```
-
-### Install dependencies
-
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
-
-```bash
-npm install
-```
-
-### Run the development server
-
-```bash
-npm run dev
-```
-
-### Setup pnpm (optional)
-
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
-
-```bash
-public-hoist-pattern[]=*@nextui-org/*
-```
-
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
-
-## License
-
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
+- Please run npm install before start.
+- Please write code inside locale folder to use localization functionality.
+- Please add your static message inside locales folder inside public. For more information you can read the provided example or contact the author.
+- To use the internalization inside the component you can use useTranslation hook from next-intl and get your message path.
+- Please use default function when working on component and arrow function in other functions.
+- Please use custom useRouter, usePathName, and Link from navigation file instead of next/link or next/navigation
+- Please use react icons for the icon.
+- Please if you want use image background do not use it directly from tailwind class or css sheet, use Next Image as a normal image and make the position is relative. This one is to make the performance gets better. You can see the example in welcome-jumbotron component for this.

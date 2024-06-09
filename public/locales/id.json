@@ -1,0 +1,24 @@
+{
+    "GENERAL": {
+        "SIDEBAR": {
+            "HOME": "BERANDA",
+            "ARTICLE": "ARTIKEL",
+            "MUSIC": "MEDITASI MUSIK",
+            "USER": "MANAJEMEN USER",
+            "JOURNAL": "JURNAL USER"
+        }
+    },
+    "HOME": {
+        "WELCOME": "SELAMAT DATANG"
+    },
+    "USER_MANAGEMENT": {
+        "COLUMN": {
+            "ID": "ID",
+            "NAME": "NAMA",
+            "AGE": "UMUR",
+            "APPROVED": "DISETUJUI",
+            "LAST_LOGGED_IN": "TERAKHIR LOG IN",
+            "CREATED_DATE": "TANGGAL DIBUAT"
+        }
+    }
+}

@@ -6,10 +6,12 @@
     "node": true
   },
   "extends": [
+    "next/core-web-vitals",
     "plugin:react/recommended",
     "plugin:prettier/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:jsx-a11y/recommended"
+    "plugin:jsx-a11y/recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "plugins": ["react", "unused-imports", "import", "@typescript-eslint", "jsx-a11y", "prettier"],
   "parser": "@typescript-eslint/parser",
@@ -64,8 +66,7 @@
             "group": "external",
             "position": "after"
           }
-        ],
-        "newlines-between": "always"
+        ]
       }
     ],
     "react/self-closing-comp": "warn",
@@ -76,16 +77,6 @@
         "shorthandFirst": true,
         "noSortAlphabetically": false,
         "reservedFirst": true
-      }
-    ],
-    "padding-line-between-statements": [
-      "warn",
-      {"blankLine": "always", "prev": "*", "next": "return"},
-      {"blankLine": "always", "prev": ["const", "let", "var"], "next": "*"},
-      {
-        "blankLine": "any",
-        "prev": ["const", "let", "var"],
-        "next": ["const", "let", "var"]
       }
     ]
   }

@@ -1,0 +1,24 @@
+{
+    "GENERAL": {
+        "SIDEBAR": {
+            "HOME": "HOME",
+            "ARTICLE": "ARTICLE",
+            "MUSIC": "MUSIC MEDITATION",
+            "USER": "USER MANAGEMENT",
+            "JOURNAL": "USERS JOURNAL"
+        }
+    },
+    "HOME": {
+        "WELCOME": "WELCOME"
+    },
+    "USER_MANAGEMENT": {
+        "COLUMN": {
+            "ID": "ID",
+            "NAME": "NAME",
+            "AGE": "AGE",
+            "APPROVED": "APPROVED",
+            "LAST_LOGGED_IN": "LAST LOGGED IN",
+            "CREATED_DATE": "CREATED DATE"
+        }
+    }
+}
