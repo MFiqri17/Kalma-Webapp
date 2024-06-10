@@ -6,6 +6,14 @@
             "MUSIC": "MEDITASI MUSIK",
             "USER": "MANAJEMEN USER",
             "JOURNAL": "JURNAL USER"
+        },
+        "AUTHORIZATION": {
+            "LOGIN": {
+
+            }
+        },
+        "VALIDATION": {
+            "REQUIRED": "THIS FIELD IS REQUIRED"
         }
     },
     "HOME": {
