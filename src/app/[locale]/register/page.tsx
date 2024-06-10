@@ -3,6 +3,7 @@ import { capitalCase } from 'text-case'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Button, Checkbox, Input } from '@nextui-org/react'
+import Link from 'next/link'
 import GeneralHeaders from '@/src/components/authHeader'
 import { RegisterPayload } from '@/src/modules/payload/auth'
 import {
@@ -51,52 +52,57 @@ const Register = () => {
 				<form className="mb-5 flex flex-col gap-y-3" onSubmit={handleSubmit(onSubmit)}>
 					<Input
 						classNames={{
-							inputWrapper: 'border-b-2 border-teal-600',
-							input: 'text-green-800'
+							inputWrapper: 'border-2 border-teal-600',
+							input: 'text-teal-600',
+							label: 'text-teal-600'
 						}}
 						label="Nama Lengkap"
-						variant="underlined"
+						variant="bordered"
 						{...register('full_name')}
 					/>
 					<p className="text-xs text-red-600">{errors.full_name?.message}</p>
 					<Input
 						classNames={{
-							inputWrapper: 'border-b-2 border-teal-600',
-							input: 'text-kalma-600'
+							inputWrapper: 'border-2 border-teal-600',
+							input: 'text-teal-600',
+							label: 'text-teal-600'
 						}}
 						label="Username"
-						variant="underlined"
+						variant="bordered"
 						{...register('username')}
 					/>
 					<p className="text-xs text-red-600">{errors.username?.message}</p>
 					<Input
 						classNames={{
-							inputWrapper: 'border-b-2 border-teal-600',
-							input: 'text-kalma-600'
+							inputWrapper: 'border-2 border-teal-600',
+							input: 'text-teal-600',
+							label: 'text-teal-600'
 						}}
 						label="Alamat Email"
-						variant="underlined"
+						variant="bordered"
 						{...register('email')}
 					/>
 					<p className="text-xs text-red-600">{errors.email?.message}</p>
 					<Input
 						classNames={{
-							inputWrapper: 'border-b-2 border-teal-600',
-							input: 'text-kalma-600'
+							inputWrapper: 'border-2 border-teal-600',
+							input: 'text-teal-600',
+							label: 'text-teal-600'
 						}}
 						label="Umur"
 						type="number"
-						variant="underlined"
+						variant="bordered"
 						{...register('age')}
 					/>
 					<p className="text-xs text-red-600">{errors.age?.message}</p>
 					<Input
 						classNames={{
-							inputWrapper: 'border-b-2 border-teal-600',
-							input: 'text-kalma-600'
+							inputWrapper: 'border-2 border-teal-600',
+							input: 'text-teal-600',
+							label: 'text-teal-600'
 						}}
 						label="Kata Sandi"
-						variant="underlined"
+						variant="bordered"
 						{...register('password')}
 					/>
 					<p className="text-xs text-red-600">{errors.password?.message}</p>
@@ -107,7 +113,9 @@ const Register = () => {
 									base: 'text-teal-600'
 								}}
 							/>
-							<p className="text-base text-black">{capitalCase('I ACCEPT TERMS AND CONDITION')}</p>
+							<p className="text-base text-black">
+								{capitalCase('SAYA SETUJU DENGAN SYARAT DAN KETENTUAN')}
+							</p>
 						</div>
 					</div>
 					<Button
@@ -117,10 +125,10 @@ const Register = () => {
 						{capitalCase('REGISTER')}
 					</Button>
 					<p className="mt-6 text-center text-base text-black">
-						{capitalCase('ALREADY HAVE ACCOUNT') + '? '}
-						<a className="text-base font-semibold text-[#2F9296]" href="/login">
+						{capitalCase('SUDAH MEMILIKI AKUN') + '? '}
+						<Link className="text-base font-semibold text-[#2F9296]" href="/login">
 							{capitalCase('LOGIN')}
-						</a>
+						</Link>
 					</p>
 				</form>
 			</div>
