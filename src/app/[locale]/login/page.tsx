@@ -3,11 +3,10 @@ import { capitalCase } from 'text-case'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Checkbox, Input } from '@nextui-org/react'
-import Link from 'next/link'
 import { LoginSchema, LoginSchemaType } from '@/src/modules/validation/authenticationValidation'
 import GeneralHeaders from '@/src/components/authHeader'
-import { LoginPayload } from '@/src/modules/payload/auth'
 import GeneralLayout from '@/src/components/authLayout'
+import { Link } from '@/src/navigation'
 
 const Login = () => {
 	const {
@@ -23,7 +22,7 @@ const Login = () => {
 	})
 
 	// eslint-disable-next-line no-console
-	const onSubmit = (credentials: LoginPayload) => console.log(credentials)
+	const onSubmit = (credentials: LoginSchemaType) => console.log(credentials)
 
 	return (
 		<GeneralLayout>

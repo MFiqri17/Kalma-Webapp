@@ -16,7 +16,7 @@ export default function GeneralLayout({ children }: { children: React.ReactNode 
 				}}
 			/>
 			<div className="flex h-screen items-center justify-center">
-				<div className="max-h-700 w-500 z-10 flex flex-col justify-center rounded-3xl bg-kalma-grey-500 p-12">
+				<div className="z-10 flex max-h-700 w-500 flex-col justify-center rounded-3xl bg-kalma-grey-500 p-12">
 					{children}
 				</div>
 			</div>

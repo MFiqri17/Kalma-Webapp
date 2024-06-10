@@ -3,14 +3,13 @@ import { capitalCase } from 'text-case'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Button, Checkbox, Input } from '@nextui-org/react'
-import Link from 'next/link'
 import GeneralHeaders from '@/src/components/authHeader'
-import { RegisterPayload } from '@/src/modules/payload/auth'
 import {
 	RegisterSchema,
 	RegisterSchemaType
 } from '@/src/modules/validation/authenticationValidation'
 import GeneralLayout from '@/src/components/authLayout'
+import { Link } from '@/src/navigation'
 
 const Register = () => {
 	const {
@@ -30,7 +29,7 @@ const Register = () => {
 	})
 
 	const onSubmit = () => {
-		const credentials: RegisterPayload = {
+		const credentials: RegisterSchemaType = {
 			email: getValues('email'),
 			password: getValues('password'),
 			username: getValues('username'),
