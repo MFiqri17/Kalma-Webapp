@@ -42,7 +42,7 @@ export default async function LocaleLayout({
 			<body
 				className={clsx('min-h-screen bg-background font-sans antialiased', fontGilroy.className)}
 			>
-				<Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
+				<Providers themeProps={{ attribute: 'class', defaultTheme: 'light' }}>
 					<div className="relative flex h-screen flex-col">
 						<main className="mx-auto w-full flex-grow">
 							<NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
