@@ -20,5 +20,13 @@
             "LAST_LOGGED_IN": "TERAKHIR LOG IN",
             "CREATED_DATE": "TANGGAL DIBUAT"
         }
+    },
+    "AUTHORIZATION": {
+        "LOGIN": {
+
+        }
+    },
+    "VALIDATION": {
+        "REQUIRED": "THIS FIELD IS REQUIRED"
     }
 }

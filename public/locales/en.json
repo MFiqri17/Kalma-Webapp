@@ -20,5 +20,13 @@
             "LAST_LOGGED_IN": "LAST LOGGED IN",
             "CREATED_DATE": "CREATED DATE"
         }
+    },
+    "AUTHORIZATION": {
+        "LOGIN": {
+
+        }
+    },
+    "VALIDATION": {
+        "REQUIRED": "THIS FIELD IS REQUIRED"
     }
 }
