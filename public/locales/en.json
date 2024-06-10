@@ -6,6 +6,14 @@
             "MUSIC": "MUSIC MEDITATION",
             "USER": "USER MANAGEMENT",
             "JOURNAL": "USERS JOURNAL"
+        },
+        "AUTHORIZATION": {
+            "LOGIN": {
+
+            }
+        },
+        "VALIDATION": {
+            "REQUIRED": "THIS FIELD IS REQUIRED"
         }
     },
     "HOME": {
