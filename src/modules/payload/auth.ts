@@ -1,21 +1,14 @@
-export type LoginPayload = {
-	email_username: string
-	password: string
-}
+import {
+	ForgotPasswordSchemaType,
+	LoginSchemaType,
+	RegisterSchemaType,
+	ResetPasswordSchemaType
+} from '../validation/authenticationValidation'
 
-export type RegisterPayload = {
-	email: string
-	password: string
-	username: string
-	full_name: string
-	age: number
-}
+export type LoginPayload = LoginSchemaType
 
-export type ForgotPassPayload = {
-	email_or_username: string
-}
+export type RegisterPayload = RegisterSchemaType
 
-export type ResesPasswordPayload = {
-	new_password: string
-	new_password_confirmation: string
-}
+export type ForgotPassPayload = ForgotPasswordSchemaType
+
+export type ResetPasswordPayload = ResetPasswordSchemaType

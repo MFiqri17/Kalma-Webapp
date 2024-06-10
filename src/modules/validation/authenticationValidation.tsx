@@ -13,7 +13,7 @@ export const RegisterSchema = z.object({
 	password: z.string().min(1, { message: requiredMessage }),
 	username: z.string().min(1, { message: requiredMessage }),
 	full_name: z.string().min(1, { message: requiredMessage }),
-	age: z.string().min(1, { message: requiredMessage })
+	age: z.number().min(1, { message: requiredMessage })
 })
 
 export const ForgotPasswordSchema = z.object({

@@ -24,7 +24,7 @@ const Register = () => {
 			password: '',
 			username: '',
 			full_name: '',
-			age: ''
+			age: 0
 		}
 	})
 
@@ -34,7 +34,7 @@ const Register = () => {
 			password: getValues('password'),
 			username: getValues('username'),
 			full_name: getValues('full_name'),
-			age: Number(getValues('age'))
+			age: getValues('age')
 		}
 		// eslint-disable-next-line no-console
 		console.log(credentials)
@@ -52,7 +52,7 @@ const Register = () => {
 					<Input
 						classNames={{
 							inputWrapper: 'border-b-2 border-teal-600',
-							input: 'text-kalma-600'
+							input: 'text-green-800'
 						}}
 						label="Nama Lengkap"
 						variant="underlined"

@@ -35,8 +35,8 @@ const Login = () => {
 				<form className="mb-5 flex flex-col gap-y-3" onSubmit={handleSubmit(onSubmit)}>
 					<Input
 						classNames={{
-							inputWrapper: 'border-b-2 border-teal-600 text-kalma-600',
-							input: 'text-kalma-600'
+							inputWrapper: 'border-b-2 border-teal-600',
+							input: 'text-green-800'
 						}}
 						label="Email atau Username"
 						variant="underlined"
