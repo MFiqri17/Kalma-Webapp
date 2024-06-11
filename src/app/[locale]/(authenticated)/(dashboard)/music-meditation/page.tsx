@@ -1,46 +1,99 @@
-import MusicCard from '@/src/components/musicCard'
+'use client'
+import TableList from '@/src/components/tableList'
+
+type MusicData = {
+	id: string
+	title: string
+	author: string
+	genre: string
+	music_link: string
+}
+
+type HeadCell = {
+	key: keyof MusicData
+	label: string
+}
 
 export default function MusicMeditation() {
-	const dataExample = [
+	const headCell: HeadCell[] = [
 		{
-			key: 1,
-			category: 'Calmness',
-			author: 'Isaac Newton',
-			title: 'A Music About Life'
+			key: 'id',
+			label: 'Id'
 		},
 		{
-			key: 2,
-			category: 'Calmness',
-			author: 'Isaac Newton',
-			title: 'A Music About Life'
+			key: 'title',
+			label: 'Title'
 		},
 		{
-			key: 3,
-			category: 'Calmness',
-			author: 'Isaac Newton',
-			title: 'A Music About Life'
+			key: 'genre',
+			label: 'Genre'
 		},
 		{
-			key: 4,
-			category: 'Calmness',
-			author: 'Isaac Newton',
-			title: 'A Music About Life'
+			key: 'author',
+			label: 'Author'
 		},
 		{
-			key: 5,
-			category: 'Calmness',
-			author: 'Isaac Newton',
-			title: 'A Music About Life'
+			key: 'music_link',
+			label: 'Music Link'
+		}
+	]
+
+	const dataExample: MusicData[] = [
+		{
+			id: '1',
+			title: 'Piano Quartet Piazzo',
+			genre: 'Instrumental',
+			author: 'Mozart',
+			music_link: 'https://youtu.be/6Ufq1RrJuDo?si=X2X2w8Mu7RLL1oWs'
+		},
+		{
+			id: '2',
+			title: 'Nature Voice - Rain Forest Calming Sound',
+			genre: 'Nature',
+			author: 'Nature Amazing Sound',
+			music_link: 'https://youtu.be/6Ufq1RrJuDo?si=X2X2w8Mu7RLL1oWs'
+		},
+		{
+			id: '3',
+			title: 'Nature Sound of Thunder Rain at Night',
+			genre: 'Nature',
+			author: 'Nature Amazing Sound',
+			music_link: 'https://youtu.be/6Ufq1RrJuDo?si=X2X2w8Mu7RLL1oWs'
+		},
+		{
+			id: '4',
+			title: 'Chopin Nocturne Op. 9 No. 2',
+			genre: 'Instrumental',
+			author: 'Francisco Tárrega',
+			music_link: 'https://youtu.be/6Ufq1RrJuDo?si=X2X2w8Mu7RLL1oWs'
+		},
+		{
+			id: '5',
+			title: 'ONE',
+			genre: 'Instrumental',
+			author: 'DEPAPEPE',
+			music_link: 'https://youtu.be/6Ufq1RrJuDo?si=X2X2w8Mu7RLL1oWs'
+		},
+		{
+			id: '6',
+			title: 'Wedding Bell',
+			genre: 'Instrumental',
+			author: 'DEPAPEPE',
+			music_link: 'https://youtu.be/6Ufq1RrJuDo?si=X2X2w8Mu7RLL1oWs'
+		},
+		{
+			id: '7',
+			title: 'Bird Sound in the Morning',
+			genre: 'Nature',
+			author: 'Nature Amazing Sound',
+			music_link: 'https://youtu.be/6Ufq1RrJuDo?si=X2X2w8Mu7RLL1oWs'
 		}
 	]
 
 	return (
-		<div className="mt-6 w-500 pl-40">
-			{dataExample.map((data) => (
-				<div key={data.key} className="mb-5">
-					<MusicCard author={data.author} category={data.category} title={data.title} />
-				</div>
-			))}
+		<div className="mt-6 flex w-full flex-col pl-10">
+			<h1 className="pb-6 text-4xl text-kalma-black-900">Music List</h1>
+			<TableList columns={headCell} data={dataExample} />
 		</div>
 	)
 }
