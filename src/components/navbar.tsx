@@ -51,9 +51,9 @@ export default function Navbar() {
 				>
 					{LanguageData.map((language) => (
 						<SelectItem
-							key={language.value}
+							key={String(language.value)}
 							textValue={language.value}
-							onPress={() => router.replace(pathName, { locale: String(language.value) })}
+							onPress={() => router.replace(pathName, { locale: language.value })}
 						>
 							<Image alt={language.label} height={25} src={language.icon_path} width={25} />
 						</SelectItem>

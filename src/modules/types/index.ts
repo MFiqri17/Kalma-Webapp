@@ -48,7 +48,7 @@ export type GetUserPropertyState = {
 
 export type LanguageType = {
 	id: string
-	value: string
+	value?: 'en' | 'id'
 	label: string
 	icon_path: string
 }
