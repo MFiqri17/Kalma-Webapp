@@ -3,6 +3,7 @@ import { Metadata, Viewport } from 'next'
 import { getMessages } from 'next-intl/server'
 import clsx from 'clsx'
 import { NextIntlClientProvider } from 'next-intl'
+import { Toaster } from 'react-hot-toast'
 import { siteConfig } from '@/src/modules/config/site'
 import { fontGilroy } from '@/src/modules/config/fonts'
 import { Locale } from '@/src/modules/config/i18n'
@@ -44,6 +45,7 @@ export default async function LocaleLayout({
 			>
 				<Providers themeProps={{ attribute: 'class', defaultTheme: 'light' }}>
 					<div className="relative flex h-screen flex-col">
+						<Toaster position="top-right" reverseOrder={false} />
 						<main className="mx-auto w-full flex-grow">
 							<NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
 						</main>
