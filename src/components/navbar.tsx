@@ -51,7 +51,7 @@ export default function Navbar() {
 				>
 					{LanguageData.map((language) => (
 						<SelectItem
-							key={language.value}
+							key={String(language.value)}
 							textValue={language.value}
 							onPress={() => router.replace(pathName, { locale: language.value })}
 						>
