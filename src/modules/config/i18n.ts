@@ -5,7 +5,7 @@ import { getRequestConfig } from 'next-intl/server'
 import { type AbstractIntlMessages } from 'next-intl'
 
 export const locales = ['en', 'id'] as const
-export const localePrefix = 'never'
+export const localePrefix = 'always'
 export type Locale = (typeof locales)[number]
 
 const messageImports = {

@@ -6,6 +6,55 @@
             "MUSIC": "MEDITASI MUSIK",
             "USER": "MANAJEMEN USER",
             "JOURNAL": "JURNAL USER"
+        },
+        "LOGIN": {
+            "TITLE": "LOGIN",
+            "SUBTITLE": "SELAMAT DATANG KEMBALI",
+            "REMEMBER": "INGATKAN SAYA",
+            "REGISTER": "DAFTAR AKUN",
+            "HASNOTACCOUNT": "BELUM MEMILIKI AKUN",
+            "FORGOTPASSWORD": "LUPA KATA SANDI",
+            "FIELDLABEL": {
+                "EMAILORUSERNAME": "EMAIL ATAU USERNAME",
+                "PASSWORD": "KATA SANDI"
+            }
+        },
+        "REGISTER": {
+            "TITLE": "DAFTAR AKUN",
+            "SUBTITLE": "SELAMAT DATANG",
+            "HASACCOUNT": "SUDAH MEMILIKI AKUN",
+            "LOGIN": "LOGIN",
+            "AGGREE": "SAYA SETUJU DENGAN SYARAT DAN KETENTUAN",
+            "CONGRAST": "SELAMAT",
+            "SHOULDAGGREE": "KAMU HARUS MENYETUJUI KEBIJAKAN KAMI TERLEBIH DAHULU",
+            "FIELDLABEL": {
+                "NAME": "NAMA LENGKAP",
+                "USERNAME": "USERNAME",
+                "EMAIL": "ALAMAT EMAIL",
+                "AGE": "UMUR",
+                "PASSWORD": "KATA SANDI"
+            }
+        },
+        "FORBIDDEN": {
+            "TITLE": "AKSES DITOLAK",
+            "BUTTON": "KEMBALI KE HALAMAN BERANDA"
+        },
+        "NOTAPPROVED": {
+            "TITLE": "AKUN MU BELUM DI APPROVED",
+            "ACTION": "KLIK TOMBOL DI BAWAH INI APABILA AKUN KAMU SUDAH DI APPROVED",
+            "BUTTON": "KEMBALI KE HALAMAN BERANDA"
+        },
+        "EMAILISNOTVERIFIED": {
+            "TITLE": "VERIFIKASI EMAIL KAMU",
+            "SUBTITLE": "VERIFIKASI EMAIL KAMU TERLEBIH DAHULU UNTUK MELAKUKAN AKSI INI",
+            "BUTTON": "KIRIM VERIFIKASI EMAIL"
+        },
+        "VALIDATION": {
+            "REQUIRED": "FIELD INI WAJIB DIISI",
+            "INVALIDEMAILFORMAT": "FORMAT EMAIL TIDAK VALID",
+            "SQLINJECTION": "FIELD INI MENGANDUNG KARAKTER YANG TIDAK DIPERBOLEHKAN",
+            "INVALIDNUMBER": "FIELD INI HARUS BERUPA TIPE INTEGER POSITIF",
+            "ALPHABETCHARONLY": "FIELD INI HANYA BOLEH DIISI DENGAN KARAKTER ALFABET DAN SPASI"
         }
     },
     "HOME": {

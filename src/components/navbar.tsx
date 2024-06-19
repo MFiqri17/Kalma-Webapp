@@ -15,9 +15,11 @@ import { useLocale } from 'next-intl'
 import { useRouter, usePathname } from '../navigation'
 import { LanguageData } from '../modules/constant/static-data'
 import { useSidebarStore } from '../modules/store'
+import { useGetUserProperty } from '../modules/store'
 
 export default function Navbar() {
 	const { toggleSidebar } = useSidebarStore()
+	const { data } = useGetUserProperty()
 	const router = useRouter()
 	const pathName = usePathname()
 	const locale = useLocale()
@@ -66,13 +68,13 @@ export default function Navbar() {
 							color="success"
 							name="Jason Hughes"
 							size="sm"
-							src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+							src={data?.avatar_link ? data.avatar_link : '/White_Kalma_Logo.svg'}
 						/>
 					</DropdownTrigger>
 					<DropdownMenu aria-label="Profile Actions" variant="flat">
 						<DropdownItem key="profile" className="h-14 gap-2">
 							<p className="font-semibold">Signed in as</p>
-							<p className="font-semibold">zoey@example.com</p>
+							<p className="font-semibold">{data?.email}</p>
 						</DropdownItem>
 						<DropdownItem key="settings">My Settings</DropdownItem>
 						<DropdownItem key="logout" color="danger">
