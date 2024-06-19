@@ -7,13 +7,54 @@
             "USER": "USER MANAGEMENT",
             "JOURNAL": "USERS JOURNAL"
         },
-        "AUTHORIZATION": {
-            "LOGIN": {
-
+        "LOGIN": {
+            "TITLE": "LOGIN",
+            "SUBTITLE": "WELCOME BACK",
+            "REMEMBER": "REMEMBER ME",
+            "REGISTER": "REGISTER",
+            "HASNOTACCOUNT": "DOES NOT HAVE AN ACCOUNT YET",
+            "FORGOTPASSWORD": "FORGOT PASSWORD",
+            "FIELDLABEL": {
+                "EMAILORUSERNAME": "EMAIL OR USERNAME",
+                "PASSWORD": "PASSWORD"
             }
         },
+        "REGISTER": {
+            "TITLE": "REGISTER",
+            "SUBTITLE": "WELCOME",
+            "HASACCOUNT": "ALREADY HAVE AN ACCOUNT",
+            "LOGIN": "LOGIN",
+            "AGGREE": "I AGREE TO THE TERMS AND CONDITIONS",
+            "CONGRAST": "CONGRATULATION",
+            "SHOULDAGGREE": "YOU NEED TO AGGREE THE TERMS FIRST",
+            "FIELDLABEL": {
+                "NAME": "FULL NAME",
+                "USERNAME": "USERNAME",
+                "EMAIL": "EMAIL ADDRESS",
+                "AGE": "AGE",
+                "PASSWORD": "PASSWORD"
+            }
+        },
+        "FORBIDDEN": {
+            "TITLE": "FORBIDDEN ACCESS",
+            "BUTTON": "BACK TO HOME PAGE"
+        },
+        "NOTAPPROVED": {
+            "TITLE": "YOUR ACCOUNT HAS NOT BEEN APPROVED",
+            "ACTION": "PLEASE CLICK BUTTON BELOW ONCE YOUR ACCOUNT IS APPROVED",
+            "BUTTON": "BACK TO HOME PAGE"
+        },
+        "EMAILISNOTVERIFIED": {
+            "TITLE": "VERIFY YOUR EMAIL",
+            "SUBTITLE": "VERIFY YOUR EMAIL FIRST TO PERFORM THIS ACTION",
+            "BUTTON": "SEND EMAIL VERIFICATION"
+        },
         "VALIDATION": {
-            "REQUIRED": "THIS FIELD IS REQUIRED"
+            "REQUIRED": "THIS FIELD IS REQUIRED",
+            "INVALIDEMAILFORMAT": "INVALID EMAIL FORMAT",
+            "SQLINJECTION": "THIS FIELD CONTAINS FORBIDDEN CHARACTER",
+            "INVALIDNUMBER": "THIS FIELD SHOULD BE POSITIVE INTEGER TYPE",
+            "ALPHABETCHARONLY": "THIS FIELD CAN ONLY CONTAIN ALPHABETIC CHARACTERS AND SPACES"
         }
     },
     "HOME": {
