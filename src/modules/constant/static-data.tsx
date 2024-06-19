@@ -4,8 +4,9 @@ import { FiUsers } from 'react-icons/fi'
 import { IoMusicalNotesOutline } from 'react-icons/io5'
 import { MdOutlineArticle } from 'react-icons/md'
 import { IoHomeOutline } from 'react-icons/io5'
+import { LanguageType } from '../types'
 
-export const LanguageData = [
+export const LanguageData: LanguageType[] = [
 	{
 		id: uniqueId(),
 		value: 'en',
