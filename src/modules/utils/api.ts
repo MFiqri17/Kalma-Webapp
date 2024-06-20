@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios'
 import { AxiosResponse } from 'axios'
-import { updateRefreshToken } from '../endpoints/general'
+import { postUpdateRefreshToken } from '../endpoints/general'
 import { ErrorResponse } from '../types/response/general'
 import {
 	getToken,
@@ -41,7 +41,7 @@ api.interceptors.response.use(
 	async (error: AxiosError<ErrorResponse>) => {
 		if (error.config?.url !== '/login' && error.response?.status === 401 && isLoggedIn()) {
 			try {
-				const response = await updateRefreshToken({ refresh_token: getToken().refresh_token })
+				const response = await postUpdateRefreshToken({ refresh_token: getToken().refresh_token })
 				if (!response) {
 					return (location.href = '/login')
 				}

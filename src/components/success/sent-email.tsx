@@ -1,11 +1,10 @@
 import { capitalCase } from 'text-case'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { Button } from '@nextui-org/react'
 import NotificationLayout from '../notification-layout'
 
-export default function RegisterSuccess({ message }: { message: string }) {
-	const t = useTranslations('GENERAL.REGISTER')
+export default function SentEmail({ message }: { message: string }) {
+	const t = useTranslations('GENERAL.EMAILISNOTVERIFIED')
 	return (
 		<NotificationLayout>
 			<div className="relative z-10 flex h-screen flex-col items-center justify-center text-center">
@@ -15,9 +14,6 @@ export default function RegisterSuccess({ message }: { message: string }) {
 						<h2 className="text-4xl font-bold text-white">{capitalCase(t('CONGRATS')) + '!'}</h2>
 						<p className="text-lg text-white">{message}</p>
 					</section>
-					<Button className="w-9/12 rounded-xl bg-white text-lg font-semibold text-kalma-blue-500">
-						{capitalCase(t('LOGIN'))}
-					</Button>
 				</section>
 			</div>
 		</NotificationLayout>

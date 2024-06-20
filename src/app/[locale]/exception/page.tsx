@@ -1,5 +1,6 @@
 import ForbiddenAccess from '@/src/components/exception/forbidden-access'
 import NotApproved from '@/src/components/exception/not-approved'
+import NotFound from '@/src/components/exception/not-found'
 
 export default function Exception({
 	searchParams
@@ -15,6 +16,8 @@ export default function Exception({
 				return <NotApproved message={String(message)} />
 			case '403':
 				return <ForbiddenAccess message={String(message)} />
+			default:
+				return <NotFound message={String(message)} />
 		}
 	}
 

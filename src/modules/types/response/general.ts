@@ -15,7 +15,12 @@ export type GetUserPropertyResponse = DefaultResponse & {
 	data: UserProperty
 }
 
+export type UpdateUserPropertyResponse = DefaultResponse & {
+	is_email_change: boolean
+	data: UserProperty
+}
+
 export type ErrorResponse<T = never> = DefaultResponse & {
-	type: 'default' | 'email' | 'approve'
+	type: 'default' | 'email' | 'approve' | 'link'
 	error_details?: T
 }
