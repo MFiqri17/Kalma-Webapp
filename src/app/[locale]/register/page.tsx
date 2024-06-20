@@ -53,14 +53,14 @@ const Register = () => {
 
 	const onSubmit = (data: RegisterPayload) => {
 		if (isAggreed) return registerMutation.mutate(data)
-		toast.error(sentenceCase(t('NOTIFICATION.SHOULDAGGREE')) + '!')
+		toast.error(sentenceCase(t('SHOULDAGGREE')) + '!')
 	}
 
 	if (registerMutation.isSuccess) return <RegisterSuccess message={registerMutation.data.message} />
 
 	return (
 		<GeneralLayout>
-			<div className="h-screen">
+			<div>
 				<GeneralHeaders
 					classname="mb-5"
 					subtitle={capitalCase(t('REGISTER.SUBTITLE'))}

@@ -1,26 +1,45 @@
 'use client'
-import { MdOutlineEmail } from 'react-icons/md'
 import { capitalCase, sentenceCase } from 'text-case'
 import { useTranslations } from 'next-intl'
 import { Button } from '@nextui-org/react'
-import NotificationLayout from '@/src/components/notification-layout'
+import { useMutation } from 'react-query'
+import { AxiosError } from 'axios'
+import toast from 'react-hot-toast'
+import { DefaultResponse, ErrorResponse } from '@/src/modules/types/response/general'
+import { postSendEmailVerification } from '@/src/modules/endpoints/general'
+import GeneralLayout from '@/src/components/authLayout'
+import GeneralHeaders from '@/src/components/authHeader'
+import SentEmail from '@/src/components/success/sent-email'
 
 export default function SendEmailVerification() {
 	const t = useTranslations('GENERAL.EMAILISNOTVERIFIED')
+	const sendVerificationMutation = useMutation<DefaultResponse, AxiosError<ErrorResponse>>({
+		mutationFn: () => postSendEmailVerification(),
+		onError: (error) => {
+			if (error.status === 400 && error.response?.data.type === 'default') {
+				toast.error(error.response.data.message)
+			}
+		}
+	})
+
+	if (sendVerificationMutation.isSuccess)
+		return <SentEmail message={sendVerificationMutation.data.message} />
+
 	return (
-		<NotificationLayout>
-			<div className="relative z-10 flex h-screen flex-col items-center justify-center text-center">
-				<MdOutlineEmail className="fill-white text-9xl" />
-				<section className="w-full px-4 lg:w-3/12 lg:px-0">
-					<section className="mb-10 mt-8 flex flex-col space-y-4">
-						<h2 className="text-4xl font-bold text-white">{capitalCase(t('TITLE'))}</h2>
-						<p className="text-lg text-white">{sentenceCase(t('SUBTITLE'))}</p>
-					</section>
-					<Button className="w-full py-4 text-lg font-semibold text-kalma-blue-500 lg:w-9/12">
-						{capitalCase(t('BUTTON'))}
-					</Button>
-				</section>
-			</div>
-		</NotificationLayout>
+		<GeneralLayout>
+			<GeneralHeaders
+				classname="mb-8"
+				subtitle={sentenceCase(t('SUBTITLE'))}
+				title={capitalCase(t('TITLE'))}
+			/>
+			<Button
+				isIconOnly={sendVerificationMutation.isLoading}
+				isLoading={sendVerificationMutation.isLoading}
+				onClick={() => sendVerificationMutation.mutate()}
+				className="w-full bg-kalma-blue-500 py-4 text-center text-lg font-semibold text-white"
+			>
+				{capitalCase(t('BUTTON'))}
+			</Button>
+		</GeneralLayout>
 	)
 }

@@ -36,12 +36,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 	if (userData.isLoading || userRole.isLoading)
 		return (
 			<div className="flex h-screen items-center justify-center">
-				<CircularProgress label="Loading..." />
+				<CircularProgress classNames={{ label: 'text-semibold' }} label="Loading..." />
 			</div>
 		)
 	return (
 		<div className="flex h-screen justify-between bg-gray-50">
-			<DynamicSidebar menuList={SidebarData.AdminMenu} />
+			<DynamicSidebar
+				menuList={
+					userRole.data?.message === 'Admin' ? SidebarData.AdminMenu : SidebarData.PsychologMenu
+				}
+			/>
 			<section className="w-full">
 				<Navbar />
 				<div className="px-5">{children}</div>
