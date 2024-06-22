@@ -69,6 +69,33 @@ export const RegisterData = [
 	}
 ]
 
+export const CreateArticleData = [
+	{
+		id: uniqueId(),
+		label: 'ARTICLE.FIELD.TITLE',
+		name: 'title',
+		type: 'text'
+	},
+	{
+		id: uniqueId(),
+		label: 'ARTICLE.FIELD.IMAGE',
+		name: 'image',
+		type: 'file'
+	},
+	{
+		id: uniqueId(),
+		label: 'ARTICLE.FIELD.ARTICLE_TYPE',
+		name: 'article_type',
+		type: 'text'
+	},
+	{
+		id: uniqueId(),
+		label: 'ARTICLE.FIELD.CONTENT',
+		name: 'content',
+		type: 'text'
+	}
+]
+
 export const UserManagamentTableColumn = [
 	{ id: uniqueId(), name_path: 'ID' },
 	{ id: uniqueId(), name_path: 'NAME' },

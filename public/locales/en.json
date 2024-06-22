@@ -88,5 +88,22 @@
             "LAST_LOGGED_IN": "LAST LOGGED IN",
             "CREATED_DATE": "CREATED DATE"
         }
+    },
+    "SELF_MANAGEMENT": {
+        "ARTICLE": {
+            "TITLE": "ARTICLE PAGE",
+            "FIELD": {
+                "TITLE": "ARTICLE TITLE",
+                "IMAGE": "BANNER IMAGE",
+                "ARTICLE_TYPE": "ARTICLE TYPE",
+                "CONTENT": "ARTICLE CONTENT"
+            },
+            "VALIDATION": {
+                "REQUIRED": "THIS FIELD IS REQUIRED"
+            }
+        },
+        "BUTTON_ACTION": {
+            "SUBMIT": "SUBMIT"
+        }
     }
 }

@@ -1,0 +1,14 @@
+[
+    {
+      "relation": [
+        "delegate_permission/common.handle_all_urls"
+      ],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.example.flutter_ta",
+        "sha256_cert_fingerprints": [
+          "EA:12:7C:2E:7C:90:1B:4E:C2:88:D1:AF:36:AE:B8:C3:E7:B3:4A:4F:FA:DF:E3:84:7F:32:A3:DE:4F:A1:DC:FE"
+        ]
+      }
+    }
+  ]
