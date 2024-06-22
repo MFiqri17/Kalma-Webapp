@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 export default function GeneralLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<div className="relative">
+		<div className="relative h-screen">
 			<Image
 				fill
 				priority

@@ -1,3 +1,3 @@
-export default function Article() {
+export default function UserManagement() {
 	return <div>hai sayang from user management</div>
 }

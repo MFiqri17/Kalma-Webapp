@@ -1,18 +1,11 @@
-import { Plus_Jakarta_Sans as fontJakartaSans } from 'next/font/google'
 import localFont from 'next/font/local'
-
-export const fontPoppins = fontJakartaSans({
-	subsets: ['latin'],
-	variable: '--font-sans',
-	weight: ['200', '300', '400', '500', '600', '700', '800']
-})
 
 export const fontGilroy = localFont({
 	src: [
 		{
 			path: '../../../public/fonts/Gilroy-Thin.ttf',
 			weight: '100',
-			style: 'normal'
+			style: 'normalx'
 		},
 		{
 			path: '../../../public/fonts/Gilroy-UltraLight.ttf',

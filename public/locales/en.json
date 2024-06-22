@@ -7,13 +7,73 @@
             "USER": "USER MANAGEMENT",
             "JOURNAL": "USERS JOURNAL"
         },
-        "AUTHORIZATION": {
-            "LOGIN": {
-
+        "LOGIN": {
+            "TITLE": "LOGIN",
+            "SUBTITLE": "WELCOME BACK",
+            "REMEMBER": "REMEMBER ME",
+            "REGISTER": "REGISTER",
+            "HASNOTACCOUNT": "DOES NOT HAVE AN ACCOUNT YET",
+            "FORGOTPASSWORD": "FORGOT PASSWORD",
+            "FIELDLABEL": {
+                "EMAILORUSERNAME": "EMAIL OR USERNAME",
+                "PASSWORD": "PASSWORD"
             }
         },
+        "REGISTER": {
+            "TITLE": "REGISTER",
+            "SUBTITLE": "WELCOME",
+            "HASACCOUNT": "ALREADY HAVE AN ACCOUNT",
+            "LOGIN": "LOGIN",
+            "AGGREE": "I AGREE TO THE TERMS AND CONDITIONS",
+            "CONGRATS": "CONGRATULATION",
+            "SHOULDAGGREE": "YOU NEED TO AGGREE THE TERMS FIRST",
+            "FIELDLABEL": {
+                "NAME": "FULL NAME",
+                "USERNAME": "USERNAME",
+                "EMAIL": "EMAIL ADDRESS",
+                "AGE": "AGE",
+                "PASSWORD": "PASSWORD"
+            }
+        },
+        "SENDEMAIL": {
+            "TITLE": "EMAIL SENT"
+        },
+        "FORBIDDEN": {
+            "TITLE": "FORBIDDEN ACCESS",
+            "BUTTON": "BACK TO HOME PAGE"
+        },
+        "NOTFOUND": {
+            "TITLE": "PAGE NOT FOUND",
+            "BUTTON": "BACK TO HOME PAGE"
+        },
+        "INVALIDLINK": {
+            "TITLE": "INVALID LINK",
+            "BUTTON1": "VERIFY YOUR EMAIL AGAIN",
+            "BUTTON2": "RESET YOUR PASSWORD AGAIN"
+        },
+        "NOTAPPROVED": {
+            "TITLE": "YOUR ACCOUNT HAS NOT BEEN APPROVED",
+            "ACTION": "PLEASE CLICK BUTTON BELOW ONCE YOUR ACCOUNT IS APPROVED",
+            "BUTTON": "BACK TO HOME PAGE"
+        },
+        "VERIFYEMAIL": {
+            "TITLE": "CONGRATULATION",
+            "BUTTON": "BACK TO HOME PAGE"
+        },
+        "EMAILISNOTVERIFIED": {
+            "TITLE": "VERIFY YOUR EMAIL",
+            "SUBTITLE": "VERIFY YOUR EMAIL FIRST TO PERFORM THIS ACTION",
+            "CONGRATS": "CONGRATULATION",
+            "BUTTON": "SEND EMAIL VERIFICATION"
+        },
         "VALIDATION": {
-            "REQUIRED": "THIS FIELD IS REQUIRED"
+            "REQUIRED": "THIS FIELD IS REQUIRED",
+            "INVALIDEMAILFORMAT": "INVALID EMAIL FORMAT",
+            "SQLINJECTION": "THIS FIELD CONTAINS FORBIDDEN CHARACTER",
+            "INVALIDNUMBER": "THIS FIELD SHOULD BE POSITIVE INTEGER TYPE",
+            "ALPHABETCHARONLY": "THIS FIELD CAN ONLY CONTAIN ALPHABETIC CHARACTERS AND SPACES",
+            "MAXIMUMIMAGESIZE": "IMAGE SIZE MUST BE LESS THAN 1MB",
+            "INVALIDIMAGEFORMAT": "ONLY IMAGE FILE FORMAT IS SUPPORTED"
         }
     },
     "HOME": {
@@ -27,6 +87,23 @@
             "APPROVED": "APPROVED",
             "LAST_LOGGED_IN": "LAST LOGGED IN",
             "CREATED_DATE": "CREATED DATE"
+        }
+    },
+    "SELF_MANAGEMENT": {
+        "ARTICLE": {
+            "TITLE": "ARTICLE PAGE",
+            "FIELD": {
+                "TITLE": "ARTICLE TITLE",
+                "IMAGE": "BANNER IMAGE",
+                "ARTICLE_TYPE": "ARTICLE TYPE",
+                "CONTENT": "ARTICLE CONTENT"
+            },
+            "VALIDATION": {
+                "REQUIRED": "THIS FIELD IS REQUIRED"
+            }
+        },
+        "BUTTON_ACTION": {
+            "SUBMIT": "SUBMIT"
         }
     }
 }

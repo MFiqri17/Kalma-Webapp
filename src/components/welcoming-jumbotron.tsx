@@ -1,9 +1,11 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { capitalCase } from 'text-case'
+import { capitalCase, titleCase } from 'text-case'
+import { useGetUserProperty } from '../modules/store'
 
-export default function WelcomingJumbotron({ userName }: { userName: string }) {
+export default function WelcomingJumbotron() {
 	const t = useTranslations('HOME')
+	const { data } = useGetUserProperty()
 
 	return (
 		<div className="relative mt-5 h-72">
@@ -19,7 +21,7 @@ export default function WelcomingJumbotron({ userName }: { userName: string }) {
 			/>
 			<section className="relative z-10 flex flex-col space-y-2 pl-8 pt-16 text-kalma-grey-100">
 				<h4 className="text-base font-medium">{`${capitalCase(t('WELCOME'))},`}</h4>
-				<h2 className="text-4xl font-bold">{userName}</h2>
+				<h2 className="text-4xl font-bold">{data && titleCase(data.full_name)}</h2>
 			</section>
 		</div>
 	)
