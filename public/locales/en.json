@@ -98,12 +98,37 @@
                 "ARTICLE_TYPE": "ARTICLE TYPE",
                 "CONTENT": "ARTICLE CONTENT"
             },
+            "WARNING": {
+                "SUCCESS_POST": "ARTICLE HAS BEEN UPLOADED!",
+                "SUCCESS_DELETE": "ARTICLE HAS BEEN DELETED!",
+                "FAILED_POST": "ARTICLE UPLOAD FAILED",
+                "FAILED_DELETE": "ARTICLE DELETION FAILED"
+            },
             "VALIDATION": {
                 "REQUIRED": "THIS FIELD IS REQUIRED"
             }
         },
+        "MUSIC": {
+            "TITLE": "MUSIC PAGE",
+            "FIELD": {
+                "TITLE": "MUSIC TITLE",
+                "GENRE": "MUSIC GENRE",
+                "AUTHOR": "MUSIC AUTHOR",
+                "IMAGE": "MUSIC PICTURE",
+                "MUSIC_LINK": "MUSIC MP3 LINK",
+                "MUSIC_FILE": "MUSIC FILE"
+            },
+            "WARNING": {
+                "SUCCESS_POST": "MUSIC HAS BEEN UPLOADED!",
+                "SUCCESS_DELETE": "MUSIC HAS BEEN DELETED!",
+                "FAILED_POST": "MUSIC UPLOAD FAILED",
+                "FAILED_DELETE": "MUSIC DELETION FAILED"
+            }
+        },
         "BUTTON_ACTION": {
-            "SUBMIT": "SUBMIT"
+            "SUBMIT": "SUBMIT",
+            "ADD_ARTICLE": "ADD ARTICLE",
+            "ADD_MUSIC": "ADD MUSIC"
         }
     }
 }

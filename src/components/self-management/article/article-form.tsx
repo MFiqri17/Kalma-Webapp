@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from 'react-query'
 import toast from 'react-hot-toast'
-import { Input } from '@nextui-org/react'
+import { Button, Input, Textarea } from '@nextui-org/react'
 import { capitalCase, sentenceCase } from 'text-case'
 import { useTranslations } from 'next-intl'
 import { CreateArticleSchema } from '@/src/modules/types/validation/self-management'
@@ -13,7 +13,7 @@ import { api } from '@/src/modules/utils/api'
 import InputLabel from '../../label-name'
 
 export default function ArticleForm() {
-	const t = useTranslations('SELF_MANAGEMENT')
+	const t = useTranslations('SELF_MANAGEMENT.ARTICLE')
 
 	const {
 		register,
@@ -99,7 +99,7 @@ export default function ArticleForm() {
 			<div>
 				<Input
 					{...register('title')}
-					variant="underlined"
+					variant="bordered"
 					classNames={{
 						inputWrapper: 'after:bg-kalma-blue-500',
 						input: '!text-kalma-black-500 text-sm font-medium'
@@ -108,7 +108,7 @@ export default function ArticleForm() {
 						<InputLabel
 							className="text-base font-medium text-kalma-blue-500"
 							isMandatory={true}
-							label={capitalCase(t('title'))}
+							label={capitalCase(t('FIELD.TITLE'))}
 						/>
 					}
 					type="text"
@@ -123,7 +123,8 @@ export default function ArticleForm() {
 				/>
 			</div>
 
-			<div>
+			<div className="mt-6">
+				<p className="text-base font-medium text-kalma-blue-500">{capitalCase(t('FIELD.IMAGE'))}</p>
 				<input
 					{...register('image')}
 					className="my-4"
@@ -135,11 +136,11 @@ export default function ArticleForm() {
 			</div>
 
 			{articleTypes.map((type, index) => (
-				<div key={index}>
-					<Input
+				<div key={index} className="mt-8">
+					<Textarea
 						value={type}
 						onChange={(e) => handleArticleTypeChange(index, e.target.value)}
-						variant="underlined"
+						variant="bordered"
 						classNames={{
 							inputWrapper: 'after:bg-kalma-blue-500',
 							input: '!text-kalma-black-500 text-sm font-medium'
@@ -149,7 +150,7 @@ export default function ArticleForm() {
 								<InputLabel
 									className="text-base font-medium text-kalma-blue-500"
 									isMandatory={true}
-									label={capitalCase(t('article_type'))}
+									label={capitalCase(t('FIELD.ARTICLE_TYPE'))}
 								/>
 							) : null
 						}
@@ -164,19 +165,19 @@ export default function ArticleForm() {
 						}
 					/>
 					{index === articleTypes.length - 1 && (
-						<button type="button" onClick={handleAddArticleType}>
+						<Button type="button" onClick={handleAddArticleType} className="mt-2">
 							Add Another Article Type
-						</button>
+						</Button>
 					)}
 				</div>
 			))}
 
 			{contents.map((content, index) => (
-				<div key={index}>
-					<Input
+				<div key={index} className="mt-10">
+					<Textarea
 						value={content}
 						onChange={(e) => handleContentChange(index, e.target.value)}
-						variant="underlined"
+						variant="bordered"
 						classNames={{
 							inputWrapper: 'after:bg-kalma-blue-500',
 							input: '!text-kalma-black-500 text-sm font-medium'
@@ -186,7 +187,7 @@ export default function ArticleForm() {
 								<InputLabel
 									className="text-base font-medium text-kalma-blue-500"
 									isMandatory={true}
-									label={capitalCase(t('content'))}
+									label={capitalCase(t('FIELD.CONTENT'))}
 								/>
 							) : null
 						}
@@ -201,9 +202,9 @@ export default function ArticleForm() {
 						}
 					/>
 					{index === contents.length - 1 && (
-						<button type="button" onClick={handleAddContent}>
+						<Button type="button" onClick={handleAddContent} className="mt-2">
 							Add Another Content
-						</button>
+						</Button>
 					)}
 				</div>
 			))}

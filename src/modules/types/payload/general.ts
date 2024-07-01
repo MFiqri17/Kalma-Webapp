@@ -16,3 +16,8 @@ export type ResetPasswordPayload = z.infer<typeof ResetPasswordSchema>
 export type RefreshTokenPayload = {
 	refresh_token: string
 }
+
+export type GetData = {
+	size: number
+	page: number
+}

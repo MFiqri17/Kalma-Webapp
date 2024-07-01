@@ -13,8 +13,13 @@ import {
 } from '@nextui-org/react'
 import { FaEye, FaPlus } from 'react-icons/fa'
 import { MdDelete, MdEdit } from 'react-icons/md'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
+import { capitalCase } from 'text-case'
+import toast from 'react-hot-toast'
 import Add from '@/src/components/music-meditation/add'
+import { MusicDataResponse } from '@/src/modules/types/response/self-management'
+import { api } from '@/src/modules/utils/api'
 
 type MusicData = {
 	id: string
@@ -25,6 +30,7 @@ type MusicData = {
 
 export default function MusicMeditation() {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
+	const t = useTranslations('SELF_MANAGEMENT')
 	const headCell = [
 		{
 			key: 'id',
@@ -48,95 +54,91 @@ export default function MusicMeditation() {
 		}
 	]
 
-	const dataExample = [
-		{
-			id: '1',
-			title: 'Piano Quartet Piazzo',
-			genre: 'Instrumental',
-			author: 'Mozart'
-		},
-		{
-			id: '2',
-			title: 'Nature Voice - Rain Forest Calming Sound',
-			genre: 'Nature',
-			author: 'Nature Amazing Sound'
-		},
-		{
-			id: '3',
-			title: 'Nature Sound of Thunder Rain at Night',
-			genre: 'Nature',
-			author: 'Nature Amazing Sound'
-		},
-		{
-			id: '4',
-			title: 'Chopin Nocturne Op. 9 No. 2',
-			genre: 'Instrumental',
-			author: 'Francisco Tárrega'
-		},
-		{
-			id: '5',
-			title: 'ONE',
-			genre: 'Instrumental',
-			author: 'DEPAPEPE'
-		},
-		{
-			id: '6',
-			title: 'Wedding Bell',
-			genre: 'Instrumental',
-			author: 'DEPAPEPE'
-		},
-		{
-			id: '7',
-			title: 'Bird Sound in the Morning',
-			genre: 'Nature',
-			author: 'Nature Amazing Sound'
-		}
-	]
-
+	const [data, setData] = useState<MusicDataResponse[]>([])
+	const [total, setTotal] = useState(0)
 	const [page, setPage] = useState(1)
-	const rowsPerPage = 10
-	const pages = Math.ceil(dataExample.length / rowsPerPage)
+	const [rowsPerPage] = useState(6)
 
-	const items = useMemo(() => {
-		const start = (page - 1) * rowsPerPage
-		const end = start + rowsPerPage
+	const getMusicData = async () => {
+		try {
+			const response = await api.get('/self-management/music-meditation', {
+				params: {
+					size: rowsPerPage,
+					page: page
+				}
+			})
+			setData(response.data.data)
+			setTotal(data.length)
+			// eslint-disable-next-line no-console
+			console.log(response.data)
+		} catch (error) {
+			// eslint-disable-next-line no-console
+			console.error('Error fetching music data:', error)
+		}
+	}
 
-		return dataExample.slice(start, end)
-	}, [page, dataExample])
+	const deleteMusic = async (id: string) => {
+		try {
+			const response = await api.delete(`/article/${id}`)
+			// eslint-disable-next-line no-console
+			console.log(response.data)
+			toast.success(t('WARNING.SUCCESS_DELETE'))
+			getMusicData()
+		} catch (error) {
+			// eslint-disable-next-line no-console
+			console.error('Error delete article data:', error)
+		}
+	}
 
-	const renderCell = useCallback((music: MusicData, columnKey: React.Key) => {
+	useEffect(() => {
+		getMusicData()
+	}, [page])
+
+	const pages = Math.ceil(total / rowsPerPage)
+
+	const renderCell = useCallback((music: MusicDataResponse, columnKey: React.Key) => {
 		const cellValue = music[columnKey as keyof MusicData]
 
 		switch (columnKey) {
 			case 'id':
-				return <p className="text-xs text-kalma-black-600">{cellValue}</p>
+				return <p className="text-sm text-kalma-black-600">{cellValue}</p>
 
 			case 'title':
-				return <p className="text-xs text-kalma-black-600">{cellValue}</p>
+				return <p className="text-sm text-kalma-black-600">{cellValue}</p>
 
 			case 'genre':
-				return <p className="text-xs text-kalma-black-600">{cellValue}</p>
+				return <p className="text-sm text-kalma-black-600">{cellValue}</p>
 
 			case 'author':
-				return <p className="text-xs text-kalma-black-600">{cellValue}</p>
+				return <p className="text-sm text-kalma-black-600">{cellValue}</p>
 
 			case 'action':
 				return (
 					<div className="relative flex items-center gap-x-4">
 						<Tooltip content="Details">
-							<span className="cursor-pointer text-lg text-default-400 active:opacity-50">
+							<Button
+								isIconOnly
+								className="cursor-pointer text-lg text-default-400 active:opacity-50"
+							>
 								<FaEye />
-							</span>
+							</Button>
 						</Tooltip>
 						<Tooltip content="Edit user">
-							<span className="cursor-pointer text-lg text-default-400 active:opacity-50">
+							<Button
+								isIconOnly
+								className="cursor-pointer text-lg text-default-400 active:opacity-50"
+							>
 								<MdEdit />
-							</span>
+							</Button>
 						</Tooltip>
 						<Tooltip color="danger" content="Delete user">
-							<span className="cursor-pointer text-lg text-danger active:opacity-50">
+							<Button
+								isIconOnly
+								className="cursor-pointer text-lg text-danger active:opacity-50"
+								onClick={() => deleteMusic(music.id)}
+							>
 								<MdDelete />
-							</span>
+							</Button>
 						</Tooltip>
 					</div>
 				)
@@ -155,7 +157,7 @@ export default function MusicMeditation() {
 					startContent={<FaPlus />}
 					onPress={onOpen}
 				>
-					Add Music
+					{capitalCase(t('BUTTON_ACTION.ADD_MUSIC'))}
 				</Button>
 			</div>
 			<Table
@@ -189,7 +191,7 @@ export default function MusicMeditation() {
 						</TableColumn>
 					))}
 				</TableHeader>
-				<TableBody emptyContent={'No rows to display.'} items={items}>
+				<TableBody emptyContent={'No rows to display.'} items={data}>
 					{(item) => (
 						<TableRow key={item.id}>
 							{(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
