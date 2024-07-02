@@ -95,12 +95,37 @@
                 "ARTICLE_TYPE": "TIPE ARTIKEL",
                 "CONTENT": "KONTEN ARTIKEL"
             },
+            "WARNING": {
+                "SUCCESS_POST": "ARTIKEL BERHASIL DIUPLOAD!",
+                "SUCCESS_DELETE": "DATA ARTIKEL BERHASIL DIHAPUS!",
+                "FAILED_POST": "GAGAL MENGUNGGAH DATA ARTIKEL",
+                "FAILED_DELETE": "GAGAL MENGHAPUS DATA ARTIKEL"
+            },
             "VALIDATION": {
                 "REQUIRED": "FIELD INI WAJIB DIISI"
             }
         },
+        "MUSIC": {
+            "TITLE": "HALAMAN MUSIK",
+            "FIELD": {
+                "TITLE": "JUDUL MUSIK",
+                "GENRE": "GENRE MUSIK",
+                "AUTHOR": "PENCIPTA/PERILIS LAGU",
+                "IMAGE": "GAMBAR MUSIK",
+                "MUSIC_LINK": "LINK MP3 MUSIK",
+                "MUSIC_FILE": "FILE MUSIK"
+            },
+            "WARNING": {
+                "SUCCESS_POST": "MUSIK BERHASIL DIUPLOAD!",
+                "SUCCESS_DELETE": "DATA MUSIK BERHASIL DIHAPUS!",
+                "FAILED_POST": "GAGAL MENGUNGGAH DATA MUSIK",
+                "FAILED_DELETE": "GAGAL MENGHAPUS DATA MUSIK"
+            }
+        },
         "BUTTON_ACTION": {
-            "SUBMIT": "SUBMIT"
+            "SUBMIT": "SUBMIT",
+            "ADD_ARTICLE": "TAMBAH ARTIKEL",
+            "ADD_MUSIC": "TAMBAH MUSIK"
         }
     }
 }

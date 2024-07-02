@@ -9,3 +9,11 @@ export type CreateArticlePayloadData = {
 	content: string[]
 	image?: File | null | undefined
 }
+
+export type CreateMusicPayload = {
+	title: string
+	author: string
+	genre: string
+	music_link: string
+	music_file?: File | null | undefined
+}

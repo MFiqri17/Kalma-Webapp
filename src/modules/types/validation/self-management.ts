@@ -1,6 +1,7 @@
+import { capitalCase } from 'text-case'
 import { z } from 'zod'
 
-const requiredMessage = 'REQUIRED'
+const requiredMessage = capitalCase('THE FIELD IS REQUIRED')
 
 export const CreateArticleSchema = z.object({
 	title: z.string().min(1, { message: requiredMessage }),
@@ -27,3 +28,14 @@ export const CreateArticleSchema = z.object({
 	article_type: z.array(z.string()),
 	content: z.array(z.string())
 })
+
+export const AddMusicSchema = z.object({
+	title: z.string().min(1, { message: requiredMessage }),
+	genre: z.string().min(1, { message: requiredMessage }),
+	author: z.string().min(1, { message: requiredMessage }),
+	music_image: z.string().min(1, { message: requiredMessage }),
+	music_link: z.string().optional(),
+	music_file: z.instanceof(FileList).optional()
+})
+
+export type AddMusicSchemaType = z.infer<typeof AddMusicSchema>
