@@ -3,7 +3,6 @@ import { useTranslations } from 'next-intl'
 import { capitalCase } from 'text-case'
 import {
 	Button,
-	Pagination,
 	Table,
 	TableBody,
 	TableCell,
@@ -12,7 +11,7 @@ import {
 	TableRow,
 	Tooltip
 } from '@nextui-org/react'
-import { MdDelete, MdEdit } from 'react-icons/md'
+import { MdDelete } from 'react-icons/md'
 import { useCallback, useEffect, useState } from 'react'
 import { FaEye, FaPlus } from 'react-icons/fa'
 import toast from 'react-hot-toast'
@@ -51,8 +50,6 @@ export default function Article() {
 	]
 
 	const [data, setData] = useState<ArticleDataResponse[]>([])
-	const [total, setTotal] = useState(0)
-	const [page, setPage] = useState(1)
 	const [rowsPerPage] = useState(6)
 
 	const getArticleData = async () => {
@@ -60,11 +57,10 @@ export default function Article() {
 			const response = await api.get('/article', {
 				params: {
 					size: rowsPerPage,
-					page: page
+					page: 1
 				}
 			})
 			setData(response.data.data)
-			setTotal(data.length)
 			// eslint-disable-next-line no-console
 			console.log(response.data)
 		} catch (error) {
@@ -88,9 +84,7 @@ export default function Article() {
 
 	useEffect(() => {
 		getArticleData()
-	}, [page])
-
-	const pages = Math.ceil(total / rowsPerPage)
+	}, [])
 
 	const renderCell = useCallback((article: ArticleDataResponse, columnKey: React.Key) => {
 		const cellValue = article[columnKey as keyof ArticleTableData]
@@ -116,15 +110,7 @@ export default function Article() {
 								<FaEye />
 							</Button>
 						</Tooltip>
-						<Tooltip content="Edit user">
-							<Button
-								isIconOnly
-								className="cursor-pointer text-lg text-default-400 active:opacity-50"
-							>
-								<MdEdit />
-							</Button>
-						</Tooltip>
-						<Tooltip color="danger" content="Delete user">
+						<Tooltip color="danger" content="Delete">
 							<Button
 								isIconOnly
 								className="cursor-pointer text-lg text-danger active:opacity-50"
@@ -152,21 +138,6 @@ export default function Article() {
 				</Button>
 			</div>
 			<Table
-				bottomContent={
-					<div className="mt-6 flex w-full justify-end">
-						<Pagination
-							showControls
-							classNames={{
-								wrapper: 'text-kalma-blue-600',
-								item: '!bg-kalma-blue-600'
-							}}
-							page={page}
-							total={pages}
-							variant="light"
-							onChange={(page) => setPage(page)}
-						/>
-					</div>
-				}
 				classNames={{
 					wrapper: 'bg-white',
 					table: 'text-kalma-black-900 text-base bg-white'
