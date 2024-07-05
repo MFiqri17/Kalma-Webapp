@@ -1,5 +1,9 @@
 import { CreateArticlePayloadData } from '../types/payload/self-management'
-import { CreateArticleResponse, MusicResponse } from '../types/response/self-management'
+import {
+	ArticleResponse,
+	CreateArticleResponse,
+	MusicResponse
+} from '../types/response/self-management'
 import { api } from '../utils/api'
 
 export const postCreateArticle = async (
@@ -20,5 +24,10 @@ export const getMusicData = async (size: number, page: number): Promise<MusicRes
 			page: page
 		}
 	})
+	return response.data
+}
+
+export const getArticleData = async (): Promise<ArticleResponse> => {
+	const response = await api.get<ArticleResponse>('/article')
 	return response.data
 }

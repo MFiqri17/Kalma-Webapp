@@ -4,12 +4,14 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from 'react-query'
 import toast from 'react-hot-toast'
-import { Button, Input, Textarea } from '@nextui-org/react'
+import { Button, Input, Select, SelectItem, Selection, Textarea, Tooltip } from '@nextui-org/react'
 import { capitalCase, sentenceCase } from 'text-case'
 import { useTranslations } from 'next-intl'
+import { MdDelete } from 'react-icons/md'
 import { CreateArticleSchema } from '@/src/modules/types/validation/self-management'
 import { CreateArticleSchemaType } from '@/src/modules/types/payload/self-management'
 import { api } from '@/src/modules/utils/api'
+import { useRouter } from '@/src/navigation'
 import InputLabel from '../../label-name'
 
 export default function ArticleForm() {
@@ -29,8 +31,52 @@ export default function ArticleForm() {
 		}
 	})
 
+	const router = useRouter()
 	const [articleTypes, setArticleTypes] = useState<string[]>([''])
 	const [contents, setContents] = useState<string[]>([''])
+
+	const articleTypeName = [
+		{
+			key: '1',
+			label: 'mental health'
+		},
+		{
+			key: '2',
+			label: 'youth mental health'
+		},
+		{
+			key: '3',
+			label: 'depression article'
+		},
+		{
+			key: '4',
+			label: 'stress article'
+		},
+		{
+			key: '5',
+			label: 'anxiety article'
+		},
+		{
+			key: '6',
+			label: 'adult mental health'
+		},
+		{
+			key: '7',
+			label: 'mental illness'
+		},
+		{
+			key: '8',
+			label: 'dare to care'
+		}
+	]
+
+	const keyToLabelMap = articleTypeName.reduce(
+		(map, article) => {
+			map[article.key] = article.label
+			return map
+		},
+		{} as Record<string, string>
+	)
 
 	const createArticleMutation = useMutation(
 		async (data: CreateArticleSchemaType) => {
@@ -59,6 +105,7 @@ export default function ArticleForm() {
 				toast.success('Article created successfully!')
 				// eslint-disable-next-line no-console
 				console.log(data)
+				router.back()
 			},
 			onError: (error) => {
 				toast.error('Failed to create article.')
@@ -72,17 +119,6 @@ export default function ArticleForm() {
 		createArticleMutation.mutate(data)
 	}
 
-	const handleAddArticleType = () => {
-		setArticleTypes([...articleTypes, ''])
-	}
-
-	const handleArticleTypeChange = (index: number, value: string) => {
-		const newArticleTypes = [...articleTypes]
-		newArticleTypes[index] = value
-		setArticleTypes(newArticleTypes)
-		setValue('article_type', newArticleTypes)
-	}
-
 	const handleAddContent = () => {
 		setContents([...contents, ''])
 	}
@@ -94,6 +130,15 @@ export default function ArticleForm() {
 		setValue('content', newContents)
 	}
 
+	const handleDeleteLastContent = () => {
+		const newContents = [...contents]
+		if (newContents.length != 1) {
+			newContents.pop()
+			setContents(newContents)
+			setValue('content', newContents)
+		}
+	}
+
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} id="submit-hook-form">
 			<div>
@@ -101,6 +146,7 @@ export default function ArticleForm() {
 					{...register('title')}
 					variant="bordered"
 					classNames={{
+						base: 'max-w-5xl',
 						inputWrapper: 'after:bg-kalma-blue-500',
 						input: '!text-kalma-black-500 text-sm font-medium'
 					}}
@@ -125,82 +171,71 @@ export default function ArticleForm() {
 
 			<div className="mt-6">
 				<p className="text-base font-medium text-kalma-blue-500">{capitalCase(t('FIELD.IMAGE'))}</p>
-				<input
-					{...register('image')}
-					className="my-4"
-					type="file"
-					onChange={(e) => {
-						setValue('image', e && e.target && e.target.files && e.target.files[0])
-					}}
-				/>
+				<input {...register('image')} className="my-4" type="file" />
 			</div>
 
-			{articleTypes.map((type, index) => (
-				<div key={index} className="mt-8">
-					<Textarea
-						value={type}
-						onChange={(e) => handleArticleTypeChange(index, e.target.value)}
-						variant="bordered"
-						classNames={{
-							inputWrapper: 'after:bg-kalma-blue-500',
-							input: '!text-kalma-black-500 text-sm font-medium'
-						}}
-						label={
-							index === 0 ? (
-								<InputLabel
-									className="text-base font-medium text-kalma-blue-500"
-									isMandatory={true}
-									label={capitalCase(t('FIELD.ARTICLE_TYPE'))}
-								/>
-							) : null
-						}
-						type="text"
-						isInvalid={Boolean(errors.article_type?.[index]?.message)}
-						errorMessage={
-							errors.article_type?.[index]?.message && (
-								<p className="mt-1 text-sm text-red-600">
-									{sentenceCase(t(`ARTICLE.VALIDATION.${errors.article_type?.[index]?.message}`))}
-								</p>
-							)
-						}
-					/>
-					{index === articleTypes.length - 1 && (
-						<Button type="button" onClick={handleAddArticleType} className="mt-2">
-							Add Another Article Type
-						</Button>
-					)}
-				</div>
-			))}
+			<Select
+				label="Article Type"
+				variant="bordered"
+				placeholder="Select a type"
+				selectedKeys={new Set(articleTypes)}
+				selectionMode="multiple"
+				className="max-w-5xl"
+				onSelectionChange={(keys: Selection) => {
+					const selectedKeysArray = Array.from(keys as Set<string>)
+					const selectedLabelsArray = selectedKeysArray
+						.map((key) => keyToLabelMap[key])
+						.filter(Boolean)
+					setArticleTypes(selectedKeysArray)
+					setValue('article_type', selectedLabelsArray)
+				}}
+			>
+				{articleTypeName.map((article) => (
+					<SelectItem key={article.key}>{article.label}</SelectItem>
+				))}
+			</Select>
 
 			{contents.map((content, index) => (
-				<div key={index} className="mt-10">
-					<Textarea
-						value={content}
-						onChange={(e) => handleContentChange(index, e.target.value)}
-						variant="bordered"
-						classNames={{
-							inputWrapper: 'after:bg-kalma-blue-500',
-							input: '!text-kalma-black-500 text-sm font-medium'
-						}}
-						label={
-							index === 0 ? (
-								<InputLabel
-									className="text-base font-medium text-kalma-blue-500"
-									isMandatory={true}
-									label={capitalCase(t('FIELD.CONTENT'))}
-								/>
-							) : null
-						}
-						type="text"
-						isInvalid={Boolean(errors.content?.[index]?.message)}
-						errorMessage={
-							errors.content?.[index]?.message && (
-								<p className="mt-1 text-sm text-red-600">
-									{sentenceCase(t(`ARTICLE.VALIDATION.${errors.content?.[index]?.message}`))}
-								</p>
-							)
-						}
-					/>
+				<div key={index} className="mt-10 flex max-w-5xl flex-col">
+					<div className="mb-3 flex flex-row items-center">
+						<Textarea
+							value={content}
+							onChange={(e) => handleContentChange(index, e.target.value)}
+							variant="bordered"
+							classNames={{
+								base: 'max-w-5xl mr-4',
+								inputWrapper: 'after:bg-kalma-blue-500',
+								input: '!text-kalma-black-500 text-sm font-medium'
+							}}
+							label={
+								index === 0 ? (
+									<InputLabel
+										className="text-base font-medium text-kalma-blue-500"
+										isMandatory={true}
+										label={capitalCase(t('FIELD.CONTENT'))}
+									/>
+								) : null
+							}
+							type="text"
+							isInvalid={Boolean(errors.content?.[index]?.message)}
+							errorMessage={
+								errors.content?.[index]?.message && (
+									<p className="mt-1 text-sm text-red-600">
+										{sentenceCase(t(`ARTICLE.VALIDATION.${errors.content?.[index]?.message}`))}
+									</p>
+								)
+							}
+						/>
+						<Tooltip color="danger" content="Delete">
+							<Button
+								isIconOnly
+								className="cursor-pointer text-lg text-danger active:opacity-50"
+								onClick={handleDeleteLastContent}
+							>
+								<MdDelete />
+							</Button>
+						</Tooltip>
+					</div>
 					{index === contents.length - 1 && (
 						<Button type="button" onClick={handleAddContent} className="mt-2">
 							Add Another Content
