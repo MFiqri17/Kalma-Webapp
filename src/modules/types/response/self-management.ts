@@ -23,6 +23,12 @@ export type MusicDetailResponse = DefaultResponse & {
 	data: MusicDataResponse
 }
 
+export type ArticleResponse = {
+	is_success: boolean
+	message: string
+	data: ArticleDataResponse[]
+}
+
 export type MusicDataResponse = {
 	id: string
 	title: string

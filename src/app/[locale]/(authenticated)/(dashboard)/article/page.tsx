@@ -3,7 +3,6 @@ import { useTranslations } from 'next-intl'
 import { capitalCase } from 'text-case'
 import {
 	Button,
-	Pagination,
 	Table,
 	TableBody,
 	TableCell,
@@ -12,13 +11,17 @@ import {
 	TableRow,
 	Tooltip
 } from '@nextui-org/react'
-import { MdDelete, MdEdit } from 'react-icons/md'
-import { useCallback, useEffect, useState } from 'react'
+import { MdDelete } from 'react-icons/md'
+import { useCallback } from 'react'
 import { FaEye, FaPlus } from 'react-icons/fa'
 import toast from 'react-hot-toast'
-import { ArticleDataResponse } from '@/src/modules/types/response/self-management'
+import { useQuery } from 'react-query'
+import { AxiosError } from 'axios'
+import { ArticleDataResponse, ArticleResponse } from '@/src/modules/types/response/self-management'
 import { api } from '@/src/modules/utils/api'
 import { Link } from '@/src/navigation'
+import { getArticleData } from '@/src/modules/endpoints/self-management'
+import { ErrorResponse } from '@/src/modules/types/response/general'
 
 type ArticleTableData = {
 	id: string
@@ -50,28 +53,10 @@ export default function Article() {
 		}
 	]
 
-	const [data, setData] = useState<ArticleDataResponse[]>([])
-	const [total, setTotal] = useState(0)
-	const [page, setPage] = useState(1)
-	const [rowsPerPage] = useState(6)
-
-	const getArticleData = async () => {
-		try {
-			const response = await api.get('/article', {
-				params: {
-					size: rowsPerPage,
-					page: page
-				}
-			})
-			setData(response.data.data)
-			setTotal(data.length)
-			// eslint-disable-next-line no-console
-			console.log(response.data)
-		} catch (error) {
-			// eslint-disable-next-line no-console
-			console.error('Error fetching music data:', error)
-		}
-	}
+	const articleData = useQuery<ArticleResponse, AxiosError<ErrorResponse>>({
+		queryKey: ['getUser'],
+		queryFn: getArticleData
+	})
 
 	const deleteArticle = async (id: string) => {
 		try {
@@ -85,12 +70,6 @@ export default function Article() {
 			console.error('Error delete article data:', error)
 		}
 	}
-
-	useEffect(() => {
-		getArticleData()
-	}, [page])
-
-	const pages = Math.ceil(total / rowsPerPage)
 
 	const renderCell = useCallback((article: ArticleDataResponse, columnKey: React.Key) => {
 		const cellValue = article[columnKey as keyof ArticleTableData]
@@ -116,15 +95,7 @@ export default function Article() {
 								<FaEye />
 							</Button>
 						</Tooltip>
-						<Tooltip content="Edit user">
-							<Button
-								isIconOnly
-								className="cursor-pointer text-lg text-default-400 active:opacity-50"
-							>
-								<MdEdit />
-							</Button>
-						</Tooltip>
-						<Tooltip color="danger" content="Delete user">
+						<Tooltip color="danger" content="Delete">
 							<Button
 								isIconOnly
 								className="cursor-pointer text-lg text-danger active:opacity-50"
@@ -140,6 +111,8 @@ export default function Article() {
 		}
 	}, [])
 
+	const articleItems = Array.isArray(articleData.data?.data) ? articleData.data.data : []
+
 	return (
 		<div className="flex flex-col p-6">
 			<div className="flex items-center justify-between pb-6">
@@ -152,21 +125,6 @@ export default function Article() {
 				</Button>
 			</div>
 			<Table
-				bottomContent={
-					<div className="mt-6 flex w-full justify-end">
-						<Pagination
-							showControls
-							classNames={{
-								wrapper: 'text-kalma-blue-600',
-								item: '!bg-kalma-blue-600'
-							}}
-							page={page}
-							total={pages}
-							variant="light"
-							onChange={(page) => setPage(page)}
-						/>
-					</div>
-				}
 				classNames={{
 					wrapper: 'bg-white',
 					table: 'text-kalma-black-900 text-base bg-white'
@@ -182,7 +140,7 @@ export default function Article() {
 						</TableColumn>
 					))}
 				</TableHeader>
-				<TableBody emptyContent={'No rows to display.'} items={data}>
+				<TableBody emptyContent={'No rows to display.'} items={articleItems}>
 					{(item) => (
 						<TableRow key={item.id}>
 							{(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
