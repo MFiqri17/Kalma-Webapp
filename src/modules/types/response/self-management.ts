@@ -1,4 +1,4 @@
-import { DefaultResponse } from './general'
+import { DefaultResponse, GetQueryResponse } from './general'
 
 export type CreateArticleResponse = DefaultResponse & {
 	data: ArticleResponseData
@@ -14,10 +14,13 @@ export type ArticleResponseData = {
 	updated_date: string
 }
 
-export type MusicResponse = {
-	is_success: boolean
-	message: string
-	data: MusicDataResponse[]
+export type MusicResponse = DefaultResponse &
+	GetQueryResponse & {
+		data: MusicDataResponse[]
+	}
+
+export type MusicDetailResponse = DefaultResponse & {
+	data: MusicDataResponse
 }
 
 export type MusicDataResponse = {
@@ -26,7 +29,7 @@ export type MusicDataResponse = {
 	author: string
 	genre: string
 	music_link: string
-	music_image?: string
+	music_image: string
 	created_by: string
 	created_date: string
 	updated_by: string

@@ -20,7 +20,7 @@ export default function Sidebar({ menuList }: { menuList: SidebarMenu[] }) {
 
 	return (
 		<ProSidebar
-			breakPoint="sm"
+			breakPoint="md"
 			collapsed={!isOpen}
 			rootStyles={{
 				[`.${sidebarClasses.container}`]: {

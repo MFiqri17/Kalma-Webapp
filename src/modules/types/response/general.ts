@@ -5,6 +5,11 @@ export type DefaultResponse = {
 	message: string
 }
 
+export type GetQueryResponse = {
+	size: number
+	page: number
+}
+
 export type AuthenticationResponse = DefaultResponse & {
 	access_token: string
 	refresh_token: string

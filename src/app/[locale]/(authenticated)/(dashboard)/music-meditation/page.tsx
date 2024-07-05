@@ -1,199 +1,176 @@
 'use client'
 import {
 	Button,
-	Pagination,
+	CircularProgress,
 	Table,
 	TableBody,
 	TableCell,
 	TableColumn,
 	TableHeader,
 	TableRow,
+	useDisclosure,
 	Tooltip,
-	useDisclosure
+	Pagination
 } from '@nextui-org/react'
-import { FaEye, FaPlus } from 'react-icons/fa'
-import { MdDelete, MdEdit } from 'react-icons/md'
-import { useCallback, useEffect, useState } from 'react'
+import { FaRegEye, FaPlus } from 'react-icons/fa'
+import { MdDeleteOutline } from 'react-icons/md'
+import { useCallback, useMemo, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { capitalCase } from 'text-case'
-import toast from 'react-hot-toast'
-import Add from '@/src/components/music-meditation/add'
+import { capitalCase, sentenceCase } from 'text-case'
+import { useQuery } from 'react-query'
+import Image from 'next/image'
+import CreateMusic from '@/src/components/music-meditation/createMusic'
+import PreviewMusic from '@/src/components/music-meditation/previewMusic'
 import { MusicDataResponse } from '@/src/modules/types/response/self-management'
-import { api } from '@/src/modules/utils/api'
+import { getMusicData } from '@/src/modules/endpoints/self-management'
+import DeleteMusic from '@/src/components/music-meditation/deleteMusic'
+import { MusicMeditationTableColumn } from '@/src/modules/constant/static-data'
+import useGetDataPayloadState from '@/src/modules/hooks'
 
 type MusicData = {
 	id: string
 	title: string
 	author: string
 	genre: string
+	music_link: string
+	music_image: string
 }
 
 export default function MusicMeditation() {
-	const { isOpen, onOpen, onOpenChange } = useDisclosure()
+	const createModal = useDisclosure()
+	const previewModal = useDisclosure()
+	const deleteModal = useDisclosure()
+	const [dataPayload, setDataPayload] = useGetDataPayloadState({
+		size: 1,
+		page: 1,
+		sort_value: 'asc',
+		sort_column: 'name',
+		search_value: '',
+		search_column: '',
+		filter_value: '',
+		filter_column: ''
+	})
+	const [musicDataState, setMusicDataState] = useState({
+		id: '',
+		title: ''
+	})
 	const t = useTranslations('SELF_MANAGEMENT')
-	const headCell = [
-		{
-			key: 'id',
-			label: 'Id'
-		},
-		{
-			key: 'title',
-			label: 'Title'
-		},
-		{
-			key: 'genre',
-			label: 'Genre'
-		},
-		{
-			key: 'author',
-			label: 'Author'
-		},
-		{
-			key: 'action',
-			label: ''
-		}
-	]
+	const musicData = useQuery(['getMusicData', dataPayload], () => getMusicData(dataPayload))
+	const currentSize = dataPayload.size ? dataPayload.size : 1
 
-	const [data, setData] = useState<MusicDataResponse[]>([])
-	const [total, setTotal] = useState(0)
-	const [page, setPage] = useState(1)
-	const [rowsPerPage] = useState(6)
-
-	const getMusicData = async () => {
-		try {
-			const response = await api.get('/self-management/music-meditation', {
-				params: {
-					size: rowsPerPage,
-					page: page
-				}
-			})
-			setData(response.data.data)
-			setTotal(data.length)
-			// eslint-disable-next-line no-console
-			console.log(response.data)
-		} catch (error) {
-			// eslint-disable-next-line no-console
-			console.error('Error fetching music data:', error)
-		}
-	}
-
-	const deleteMusic = async (id: string) => {
-		try {
-			const response = await api.delete(`/article/${id}`)
-			// eslint-disable-next-line no-console
-			console.log(response.data)
-			toast.success(t('WARNING.SUCCESS_DELETE'))
-			getMusicData()
-		} catch (error) {
-			// eslint-disable-next-line no-console
-			console.error('Error delete article data:', error)
-		}
-	}
-
-	useEffect(() => {
-		getMusicData()
-	}, [page])
-
-	const pages = Math.ceil(total / rowsPerPage)
+	const pages = useMemo(() => {
+		return musicData.data?.size ? Math.ceil(musicData.data?.size / currentSize) : 0
+	}, [dataPayload, musicData.data?.size, dataPayload.size])
 
 	const renderCell = useCallback((music: MusicDataResponse, columnKey: React.Key) => {
 		const cellValue = music[columnKey as keyof MusicData]
-
 		switch (columnKey) {
-			case 'id':
-				return <p className="text-sm text-kalma-black-600">{cellValue}</p>
-
 			case 'title':
-				return <p className="text-sm text-kalma-black-600">{cellValue}</p>
-
-			case 'genre':
-				return <p className="text-sm text-kalma-black-600">{cellValue}</p>
-
-			case 'author':
-				return <p className="text-sm text-kalma-black-600">{cellValue}</p>
-
+				return (
+					<div className="flex items-center justify-start space-x-6">
+						<Image src={music.music_image} width={100} height={50} alt={cellValue!} />
+						<p className="text-kalma-black-600">{capitalCase(cellValue)}</p>
+					</div>
+				)
 			case 'action':
 				return (
-					<div className="relative flex items-center gap-x-4">
-						<Tooltip content="Details">
+					<div className="flex justify-end -space-x-6">
+						<Tooltip content={sentenceCase(t('MUSIC.ACTION.PREVIEW'))}>
 							<Button
-								isIconOnly
-								className="cursor-pointer text-lg text-default-400 active:opacity-50"
+								variant="light"
+								onClick={() => {
+									setMusicDataState({ id: music.id, title: music.title })
+									previewModal.onOpenChange()
+								}}
 							>
-								<FaEye />
+								<FaRegEye className="text-lg" />
 							</Button>
 						</Tooltip>
-						<Tooltip content="Edit user">
+						<Tooltip color="danger" content={sentenceCase(t('MUSIC.ACTION.DELETE'))}>
 							<Button
-								isIconOnly
-								className="cursor-pointer text-lg text-default-400 active:opacity-50"
+								variant="light"
+								onClick={() => {
+									setMusicDataState({ id: music.id, title: music.title })
+									deleteModal.onOpenChange()
+								}}
 							>
-								<MdEdit />
-							</Button>
-						</Tooltip>
-						<Tooltip color="danger" content="Delete user">
-							<Button
-								isIconOnly
-								className="cursor-pointer text-lg text-danger active:opacity-50"
-								onClick={() => deleteMusic(music.id)}
-							>
-								<MdDelete />
+								<MdDeleteOutline className="text-lg text-red-500" />
 							</Button>
 						</Tooltip>
 					</div>
 				)
 			default:
-				return cellValue
+				return <p className="text-kalma-black-600">{capitalCase(cellValue)}</p>
 		}
 	}, [])
 
+	if (musicData.isLoading)
+		return (
+			<div className="flex h-screen items-center justify-center">
+				<CircularProgress classNames={{ label: 'text-semibold' }} label="Loading..." />
+			</div>
+		)
+
 	return (
-		<div className="mt-6 flex w-full flex-col pl-10">
-			<Add isOpen={isOpen} onOpenChange={onOpenChange} />
-			<div className="flex items-center justify-between pb-6">
-				<h1 className="text-4xl text-kalma-black-900">Music List</h1>
+		<div className="mt-6 flex w-full flex-col">
+			<CreateMusic isOpen={createModal.isOpen} onOpenChange={createModal.onOpenChange} />
+			<PreviewMusic
+				id={musicDataState.id}
+				isOpen={previewModal.isOpen}
+				onOpenChange={previewModal.onOpenChange}
+			/>
+			<DeleteMusic
+				isOpen={deleteModal.isOpen}
+				onOpenChange={deleteModal.onOpenChange}
+				data={musicDataState}
+			/>
+			<div className="flex items-center justify-between px-4 pb-6">
+				<h1 className="text-xl font-semibold text-kalma-black-900">
+					{capitalCase(t('MUSIC.TITLE'))}
+				</h1>
 				<Button
-					className="rounded-xl bg-[#2F9296] py-4 text-lg font-semibold text-white hover:bg-[#2F9296] hover:opacity-80 focus:bg-[#2F9296]"
+					className="rounded-xl bg-[#2F9296] py-4 text-base font-semibold text-white hover:bg-[#2F9296] hover:opacity-80 focus:bg-[#2F9296]"
 					startContent={<FaPlus />}
-					onPress={onOpen}
+					onPress={createModal.onOpen}
 				>
-					{capitalCase(t('BUTTON_ACTION.ADD_MUSIC'))}
+					{capitalCase(t('MUSIC.ACTION.CREATE'))}
 				</Button>
 			</div>
 			<Table
-				bottomContent={
-					<div className="mt-6 flex w-full justify-end">
-						<Pagination
-							showControls
-							classNames={{
-								wrapper: 'text-kalma-blue-600',
-								item: '!bg-kalma-blue-600'
-							}}
-							page={page}
-							total={pages}
-							variant="light"
-							onChange={(page) => setPage(page)}
-						/>
-					</div>
-				}
 				classNames={{
-					wrapper: 'bg-white',
-					table: 'text-kalma-black-900 text-base bg-white'
+					wrapper: 'bg-white w-full max-h-[520px] overflow-y-scroll'
 				}}
+				bottomContent={
+					pages > 0 ? (
+						<div className="flex w-full justify-center">
+							<Pagination
+								isCompact
+								showControls
+								showShadow
+								color="primary"
+								page={dataPayload.page}
+								total={pages}
+								onChange={(page) => setDataPayload({ page: page })}
+							/>
+						</div>
+					) : null
+				}
+				isStriped
+				isHeaderSticky
 			>
 				<TableHeader>
-					{headCell.map((column) => (
+					{MusicMeditationTableColumn.map((column) => (
 						<TableColumn
 							key={String(column.key)}
 							className="bg-kalma-grey-200 text-base font-bold text-kalma-black-900"
 						>
-							{column.label}
+							{capitalCase(t(`MUSIC.COLUMN.${column.label_path}`))}
 						</TableColumn>
 					))}
 				</TableHeader>
-				<TableBody emptyContent={'No rows to display.'} items={data}>
+				<TableBody emptyContent={'No rows to display.'} items={musicData.data?.data}>
 					{(item) => (
-						<TableRow key={item.id}>
+						<TableRow key={item.id} className="text-base">
 							{(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
 						</TableRow>
 					)}

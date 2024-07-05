@@ -87,18 +87,19 @@ export const UpdateUserSchema = z.object({
 	avatar: z
 		.unknown()
 		.transform((value) => value as FileList | null | undefined)
-		.transform((value) => value?.item(0))
 		.refine(
 			(file) => {
 				if (!file) return true
-				return file?.size <= 1024 * 1024
+				if (!file[0]) return true
+				return file[0]?.size <= 1024 * 1024
 			},
 			{ message: maximumImageSizeImage }
 		)
 		.refine(
 			(file) => {
 				if (!file) return true
-				return ['image/jpeg', 'image/png'].includes(file?.type)
+				if (!file[0]) return true
+				return ['image/jpeg', 'image/png'].includes(file[0]?.type)
 			},
 			{
 				message: invalidImageFormatMessage

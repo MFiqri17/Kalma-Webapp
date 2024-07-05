@@ -1,41 +1,96 @@
-import { capitalCase } from 'text-case'
 import { z } from 'zod'
+import { validateSQLInjection } from './general'
 
-const requiredMessage = capitalCase('THE FIELD IS REQUIRED')
+const requiredMessage = 'REQUIRED'
+const containsSQLIMessage = 'SQLINJECTION'
+const maximumImageSizeImage = 'MAXIMUMIMAGESIZE'
+const invalidImageFormatMessage = 'INVALIDIMAGEFORMAT'
+const invalidMusicFormatMessage = 'INVALIDMUSICFORMAT'
+const supportedMusicFormat = ['mp3', 'mpeg']
+
+const getFileFormatUsingSplit = (url: string): string => {
+	const parts = url.split('.')
+	return parts[parts.length - 1]
+}
 
 export const CreateArticleSchema = z.object({
-	title: z.string().min(1, { message: requiredMessage }),
+	title: z
+		.string()
+		.min(1, { message: requiredMessage })
+		.trim()
+		.refine(validateSQLInjection, { message: containsSQLIMessage }),
 	image: z
 		.unknown()
 		.transform((value) => value as FileList | null | undefined)
-		.transform((value) => value?.item(0))
 		.refine(
 			(file) => {
 				if (!file) return true
-				return file?.size <= 1024 * 1024
+				if (!file[0]) return true
+				return file[0]?.size <= 1024 * 1024
 			},
-			{ message: 'Above maximum size of page' }
+			{ message: maximumImageSizeImage }
 		)
 		.refine(
 			(file) => {
 				if (!file) return true
-				return ['image/jpeg', 'image/png'].includes(file?.type)
+				if (!file[0]) return true
+				return file[0]?.type.startsWith('image/')
 			},
 			{
-				message: 'Invalid Image Format'
+				message: invalidImageFormatMessage
 			}
 		),
-	article_type: z.array(z.string()),
-	content: z.array(z.string())
+	article_type: z.string().array().min(1, {
+		message: 'THIS FIELD SHOULD AT LEAST CONTAIN 1 VALUE IN ARRAY'
+	}),
+	content: z.string().array().min(1, {
+		message: 'THIS FIELD SHOULD AT LEAST CONTAIN 1 VALUE IN ARRAY'
+	})
 })
 
-export const AddMusicSchema = z.object({
-	title: z.string().min(1, { message: requiredMessage }),
-	genre: z.string().min(1, { message: requiredMessage }),
-	author: z.string().min(1, { message: requiredMessage }),
-	music_image: z.string().min(1, { message: requiredMessage }),
-	music_link: z.string().optional(),
-	music_file: z.instanceof(FileList).optional()
+export const CreateMusicSchema = z.object({
+	title: z
+		.string()
+		.min(1, { message: requiredMessage })
+		.trim()
+		.refine(validateSQLInjection, { message: containsSQLIMessage }),
+	genre: z
+		.string()
+		.min(1, { message: requiredMessage })
+		.trim()
+		.refine(validateSQLInjection, { message: containsSQLIMessage }),
+	author: z
+		.string()
+		.min(1, { message: requiredMessage })
+		.trim()
+		.refine(validateSQLInjection, { message: containsSQLIMessage }),
+	music_image: z
+		.string()
+		.min(1, { message: requiredMessage })
+		.trim()
+		.refine(validateSQLInjection, { message: containsSQLIMessage }),
+	music_link: z
+		.string()
+		.min(1, { message: requiredMessage })
+		.trim()
+		.refine(validateSQLInjection, { message: containsSQLIMessage })
+		.refine(
+			(value) => value && supportedMusicFormat.includes(getFileFormatUsingSplit(value)),
+			invalidMusicFormatMessage
+		)
+		.optional(),
+	music_file: z
+		.unknown()
+		.transform((value) => value as FileList | null | undefined)
+		.refine(
+			(file) => {
+				if (!file) return true
+				if (!file[0]) return true
+				return file[0]?.type.startsWith('audio/')
+			},
+			{
+				message: invalidMusicFormatMessage
+			}
+		)
+		.optional()
 })
-
-export type AddMusicSchemaType = z.infer<typeof AddMusicSchema>

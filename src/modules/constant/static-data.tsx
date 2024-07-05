@@ -105,6 +105,41 @@ export const UserManagamentTableColumn = [
 	{ id: uniqueId(), name_path: 'CREATED DATE' }
 ]
 
+export const MusicMeditationTableColumn = [
+	{
+		key: 'title',
+		label_path: 'TITLE'
+	},
+	{
+		key: 'genre',
+		label_path: 'GENRE'
+	},
+	{
+		key: 'author',
+		label_path: 'AUTHOR'
+	},
+	{
+		key: 'created_by',
+		label_path: 'CREATED_BY'
+	},
+	{
+		key: 'created_date',
+		label_path: 'CREATED_DATE'
+	},
+	{
+		key: 'updated_by',
+		label_path: 'UPDATED_BY'
+	},
+	{
+		key: 'updated_date',
+		label_path: 'UPDATED_DATE'
+	},
+	{
+		key: 'action',
+		label_path: 'ACTION'
+	}
+]
+
 export const SidebarData = {
 	PsychologMenu: [
 		{
@@ -159,3 +194,32 @@ export const SidebarData = {
 		}
 	]
 }
+
+export const listMusicImages = [
+	{
+		name: 'Lake',
+		url: 'https://res.cloudinary.com/dol4595k7/image/upload/v1718980748/lake_eliscl.jpg'
+	},
+	{
+		name: 'Night Sky',
+		url: 'https://res.cloudinary.com/dol4595k7/image/upload/v1718980749/night_sky_gp7ifv.jpg'
+	},
+	{
+		name: 'Mountain',
+		url: 'https://res.cloudinary.com/dol4595k7/image/upload/v1718980748/mountain_hewhlv.jpg'
+	},
+	{
+		name: 'River',
+		url: 'https://res.cloudinary.com/dol4595k7/image/upload/v1718980748/river_kmqgil.jpg'
+	},
+	{
+		name: 'Beach',
+		url: 'https://res.cloudinary.com/dol4595k7/image/upload/v1718980748/beach_zjvnsp.jpg'
+	},
+	{
+		name: 'Forest',
+		url: 'https://res.cloudinary.com/dol4595k7/image/upload/v1718980747/forest_kvt6me.jpg'
+	}
+]
+
+export const listMusicGenre = ['pop', 'rock', 'jazz', 'nature', 'instrumental']
