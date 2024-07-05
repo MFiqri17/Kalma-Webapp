@@ -4,9 +4,10 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from 'react-query'
 import toast from 'react-hot-toast'
-import { Button, Input, Select, SelectItem, Selection, Textarea } from '@nextui-org/react'
+import { Button, Input, Select, SelectItem, Selection, Textarea, Tooltip } from '@nextui-org/react'
 import { capitalCase, sentenceCase } from 'text-case'
 import { useTranslations } from 'next-intl'
+import { MdDelete } from 'react-icons/md'
 import { CreateArticleSchema } from '@/src/modules/types/validation/self-management'
 import { CreateArticleSchemaType } from '@/src/modules/types/payload/self-management'
 import { api } from '@/src/modules/utils/api'
@@ -129,6 +130,15 @@ export default function ArticleForm() {
 		setValue('content', newContents)
 	}
 
+	const handleDeleteLastContent = () => {
+		const newContents = [...contents]
+		if (newContents.length != 1) {
+			newContents.pop()
+			setContents(newContents)
+			setValue('content', newContents)
+		}
+	}
+
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} id="submit-hook-form">
 			<div>
@@ -186,35 +196,46 @@ export default function ArticleForm() {
 			</Select>
 
 			{contents.map((content, index) => (
-				<div key={index} className="mt-10">
-					<Textarea
-						value={content}
-						onChange={(e) => handleContentChange(index, e.target.value)}
-						variant="bordered"
-						classNames={{
-							base: 'max-w-5xl',
-							inputWrapper: 'after:bg-kalma-blue-500',
-							input: '!text-kalma-black-500 text-sm font-medium'
-						}}
-						label={
-							index === 0 ? (
-								<InputLabel
-									className="text-base font-medium text-kalma-blue-500"
-									isMandatory={true}
-									label={capitalCase(t('FIELD.CONTENT'))}
-								/>
-							) : null
-						}
-						type="text"
-						isInvalid={Boolean(errors.content?.[index]?.message)}
-						errorMessage={
-							errors.content?.[index]?.message && (
-								<p className="mt-1 text-sm text-red-600">
-									{sentenceCase(t(`ARTICLE.VALIDATION.${errors.content?.[index]?.message}`))}
-								</p>
-							)
-						}
-					/>
+				<div key={index} className="mt-10 flex max-w-5xl flex-col">
+					<div className="mb-3 flex flex-row items-center">
+						<Textarea
+							value={content}
+							onChange={(e) => handleContentChange(index, e.target.value)}
+							variant="bordered"
+							classNames={{
+								base: 'max-w-5xl mr-4',
+								inputWrapper: 'after:bg-kalma-blue-500',
+								input: '!text-kalma-black-500 text-sm font-medium'
+							}}
+							label={
+								index === 0 ? (
+									<InputLabel
+										className="text-base font-medium text-kalma-blue-500"
+										isMandatory={true}
+										label={capitalCase(t('FIELD.CONTENT'))}
+									/>
+								) : null
+							}
+							type="text"
+							isInvalid={Boolean(errors.content?.[index]?.message)}
+							errorMessage={
+								errors.content?.[index]?.message && (
+									<p className="mt-1 text-sm text-red-600">
+										{sentenceCase(t(`ARTICLE.VALIDATION.${errors.content?.[index]?.message}`))}
+									</p>
+								)
+							}
+						/>
+						<Tooltip color="danger" content="Delete">
+							<Button
+								isIconOnly
+								className="cursor-pointer text-lg text-danger active:opacity-50"
+								onClick={handleDeleteLastContent}
+							>
+								<MdDelete />
+							</Button>
+						</Tooltip>
+					</div>
 					{index === contents.length - 1 && (
 						<Button type="button" onClick={handleAddContent} className="mt-2">
 							Add Another Content

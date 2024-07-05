@@ -7,13 +7,13 @@ const AddArticle = () => {
 	const t = useTranslations('SELF_MANAGEMENT')
 
 	return (
-		<div className="flex flex-col pl-8 pt-4">
+		<div className="flex max-h-screen flex-col overflow-y-auto pl-8 pt-4">
 			<h1 className="mb-6 text-2xl text-kalma-black-600">{capitalCase(t('ARTICLE.TITLE'))}</h1>
 			<div className="mt-5">
 				<ArticleForm />
 			</div>
 			<Button
-				className="mt-6 w-48 rounded-full bg-kalma-blue-500 py-4 text-lg font-semibold text-white hover:bg-kalma-blue-500 hover:opacity-80 focus:bg-kalma-blue-500"
+				className="mt-20 w-48 rounded-full bg-kalma-blue-500 py-4 text-lg font-semibold text-white hover:bg-kalma-blue-500 hover:opacity-80 focus:bg-kalma-blue-500"
 				type="submit"
 				form="submit-hook-form"
 			>
