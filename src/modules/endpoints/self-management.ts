@@ -1,18 +1,34 @@
 import { GetDataPayload } from '../types/payload/general'
 import { DefaultResponse } from '../types/response/general'
 import {
-	CreateArticleResponse,
+	ArticleDetailResponse,
+	ArticleResponse,
 	MusicDetailResponse,
 	MusicResponse
 } from '../types/response/self-management'
 import { api } from '../utils/api'
 
-export const postCreateArticle = async (data: FormData): Promise<CreateArticleResponse> => {
-	const response = await api.post<CreateArticleResponse>('/article', data, {
+export const postArticleData = async (data: FormData): Promise<DefaultResponse> => {
+	const response = await api.post<DefaultResponse>('/article/create', data, {
 		headers: {
 			'Content-Type': 'mulitpart/form-data'
 		}
 	})
+	return response.data
+}
+
+export const getArticleData = async (data?: GetDataPayload): Promise<ArticleResponse> => {
+	const response = await api.post<ArticleResponse>('/article/get', data)
+	return response.data
+}
+
+export const getArticleDataDetail = async (id: string): Promise<ArticleDetailResponse> => {
+	const response = await api.get<ArticleDetailResponse>(`/article/get/${id}`)
+	return response.data
+}
+
+export const deleteArticleById = async (id: string): Promise<DefaultResponse> => {
+	const response = await api.delete<DefaultResponse>(`/article/delete/${id}`)
 	return response.data
 }
 
@@ -30,7 +46,7 @@ export const postMusicData = async (data: FormData): Promise<DefaultResponse> =>
 }
 
 export const getMusicData = async (data?: GetDataPayload): Promise<MusicResponse> => {
-	const response = await api.post<MusicResponse>('/self-management/music-meditation', data)
+	const response = await api.post<MusicResponse>('/self-management/music-meditation/get', data)
 	return response.data
 }
 
@@ -40,6 +56,8 @@ export const getMusicDataDetail = async (id: string): Promise<MusicDetailRespons
 }
 
 export const deleteMusicById = async (id: string): Promise<DefaultResponse> => {
-	const response = await api.delete<DefaultResponse>(`/self-management/music-meditation/${id}`)
+	const response = await api.delete<DefaultResponse>(
+		`/self-management/music-meditation/delete/${id}`
+	)
 	return response.data
 }

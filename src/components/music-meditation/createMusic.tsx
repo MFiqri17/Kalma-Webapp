@@ -12,7 +12,8 @@ import { DefaultResponse, ErrorResponse } from '@/src/modules/types/response/gen
 import { postMusicData } from '@/src/modules/endpoints/self-management'
 import { CreateMusicPayload } from '@/src/modules/types/payload/self-management'
 import { CreateMusicSchema } from '@/src/modules/types/validation/self-management'
-import { listMusicGenre, listMusicImages } from '@/src/modules/constant/static-data'
+import { ListMusicGenre, ListMusicImages } from '@/src/modules/constant/static-data'
+import InputLabel from '../label-name'
 import MusicFormModal from './static/musicFormModal'
 import AudioPlayerComponent from './static/audioPlayer'
 
@@ -61,8 +62,8 @@ export default function CreateMusic({
 		mutationFn: (musicData) => postMusicData(musicData),
 		onSuccess: (data) => {
 			toast.success(data.message)
-			onOpenChange(false)
 			queryQlient.invalidateQueries('getMusic')
+			handleModalChange(false)
 		},
 		onError: (error) => {
 			if (error.response?.status === 400) {
@@ -86,13 +87,13 @@ export default function CreateMusic({
 	const handleModalChange = (value: boolean) => {
 		onOpenChange(value)
 		if (!value) {
+			setMusicFilePreview(null)
 			reset(
 				{
 					title: '',
 					genre: '',
 					author: '',
-					music_image: '',
-					music_link: ''
+					music_image: ''
 				},
 				{
 					keepErrors: false
@@ -107,7 +108,7 @@ export default function CreateMusic({
 			isOpen={isOpen}
 			onOpenChange={handleModalChange}
 		>
-			<ModalBody>
+			<ModalBody className="px-3 md:px-6">
 				<form id="submit-hook-form" onSubmit={handleSubmit(onSubmit)}>
 					<div className="flex flex-col space-y-10">
 						<Input
@@ -120,7 +121,13 @@ export default function CreateMusic({
 								)
 							}
 							isInvalid={Boolean(errors.title?.message)}
-							label={capitalCase(t('SELF_MANAGEMENT.MUSIC.FIELD.TITLE'))}
+							label={
+								<InputLabel
+									className="text-sm text-black"
+									label={capitalCase(t('SELF_MANAGEMENT.MUSIC.FIELD.TITLE'))}
+									isMandatory={true}
+								/>
+							}
 							placeholder={sentenceCase(t('SELF_MANAGEMENT.MUSIC.PLACEHOLDER.TITLE'))}
 							radius="sm"
 							labelPlacement="outside"
@@ -137,13 +144,19 @@ export default function CreateMusic({
 								)
 							}
 							isInvalid={Boolean(errors.genre?.message)}
-							label={capitalCase(t('SELF_MANAGEMENT.MUSIC.FIELD.GENRE'))}
+							label={
+								<InputLabel
+									className="text-sm text-black"
+									label={capitalCase(t('SELF_MANAGEMENT.MUSIC.FIELD.GENRE'))}
+									isMandatory={true}
+								/>
+							}
 							placeholder={sentenceCase(t('SELF_MANAGEMENT.MUSIC.PLACEHOLDER.GENRE'))}
 							radius="sm"
 							labelPlacement="outside"
 							variant="bordered"
 						>
-							{listMusicGenre.map((data) => (
+							{ListMusicGenre.map((data) => (
 								<SelectItem key={data}>{capitalCase(data)}</SelectItem>
 							))}
 						</Select>
@@ -157,7 +170,13 @@ export default function CreateMusic({
 								)
 							}
 							isInvalid={Boolean(errors.author?.message)}
-							label={capitalCase(t('SELF_MANAGEMENT.MUSIC.FIELD.AUTHOR'))}
+							label={
+								<InputLabel
+									className="text-sm text-black"
+									label={capitalCase(t('SELF_MANAGEMENT.MUSIC.FIELD.AUTHOR'))}
+									isMandatory={true}
+								/>
+							}
 							placeholder={sentenceCase(t('SELF_MANAGEMENT.MUSIC.PLACEHOLDER.AUTHOR'))}
 							radius="sm"
 							labelPlacement="outside"
@@ -173,7 +192,13 @@ export default function CreateMusic({
 								)
 							}
 							isInvalid={Boolean(errors.music_image?.message)}
-							label={capitalCase(t('SELF_MANAGEMENT.MUSIC.FIELD.IMAGE'))}
+							label={
+								<InputLabel
+									className="text-sm text-black"
+									label={capitalCase(t('SELF_MANAGEMENT.MUSIC.FIELD.IMAGE'))}
+									isMandatory={true}
+								/>
+							}
 							placeholder={sentenceCase(t('SELF_MANAGEMENT.MUSIC.PLACEHOLDER.IMAGE'))}
 							radius="sm"
 							startContent={
@@ -184,12 +209,18 @@ export default function CreateMusic({
 							labelPlacement="outside"
 							variant="bordered"
 						>
-							{listMusicImages.map((data) => (
+							{ListMusicImages.map((data) => (
 								<SelectItem key={data.url}>{data.name}</SelectItem>
 							))}
 						</Select>
 						<Select
-							label={capitalCase(t('SELF_MANAGEMENT.MUSIC.FIELD.MUSIC SOURCE'))}
+							label={
+								<InputLabel
+									className="text-sm text-black"
+									label={capitalCase(t('SELF_MANAGEMENT.MUSIC.FIELD.MUSIC SOURCE'))}
+									isMandatory={true}
+								/>
+							}
 							placeholder={sentenceCase(t('SELF_MANAGEMENT.MUSIC.PLACEHOLDER.MUSIC SOURCE'))}
 							defaultSelectedKeys={['File']}
 							labelPlacement="outside"
@@ -205,11 +236,13 @@ export default function CreateMusic({
 						</Select>
 						{isMusicFile ? (
 							<>
-								<div className="mt-6">
-									<p className="text-sm text-black">
-										{capitalCase(t('SELF_MANAGEMENT.MUSIC.FIELD.MUSIC_FILE'))}
-									</p>
-									<input className="mb-1 mt-2" type="file" {...register('music_file')} />
+								<div className="!mt-3">
+									<InputLabel
+										className="text-sm text-black"
+										label={capitalCase(t('SELF_MANAGEMENT.MUSIC.FIELD.MUSIC_FILE'))}
+										isMandatory={true}
+									/>
+									<input className="mb-1 mt-2 text-sm" type="file" {...register('music_file')} />
 									{errors.music_file && (
 										<p className="mt text-sm text-red-600">
 											{sentenceCase(t(`GENERAL.VALIDATION.${errors?.music_file?.message}`))}
@@ -232,7 +265,13 @@ export default function CreateMusic({
 										)
 									}
 									isInvalid={Boolean(errors.music_link?.message)}
-									label={capitalCase(t('SELF_MANAGEMENT.MUSIC.FIELD.MUSIC_LINK'))}
+									label={
+										<InputLabel
+											className="text-sm text-black"
+											label={capitalCase(t('SELF_MANAGEMENT.MUSIC.FIELD.MUSIC_LINK'))}
+											isMandatory={true}
+										/>
+									}
 									placeholder={sentenceCase(t('SELF_MANAGEMENT.MUSIC.PLACEHOLDER.MUSIC_LINK'))}
 									radius="sm"
 									labelPlacement="outside"

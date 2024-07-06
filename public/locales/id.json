@@ -11,6 +11,10 @@
             "SIGNIN": "MASUK SEBAGAI",
             "LOGOUT": "KELUAR"
         },
+        "TABLE": {
+            "ITEMPERPAGE": "UKURAN",
+            "OF": "DARI"
+        },
         "LOGIN": {
             "TITLE": "LOGIN",
             "SUBTITLE": "SELAMAT DATANG KEMBALI",
@@ -93,11 +97,14 @@
     },
     "SELF_MANAGEMENT": {
         "ARTICLE": {
-            "TITLE": "HALAMAN ARTIKEL",
+            "TITLE": "ARTIKEL",
             "ACTION": {
                 "CREATE": "TAMBAH ARTIKEL",
                 "DELETE": "HAPUS ARTIKEL",
-                "PREVIEW": "LIHAT ARTIKEL"
+                "PREVIEW": "LIHAT ARTIKEL",
+                "SEARCH": "CARI BERDASARKAN JUDUL ATAU TIPE ARTIKEL",
+                "ADD_CONTENT": "TAMBAH KONTEN",
+                "DELETE_CONTENT": "HAPUS KONTEN"
             },
             "FIELD": {
                 "TITLE": "JUDUL ARTIKEL",
@@ -105,14 +112,17 @@
                 "ARTICLE_TYPE": "TIPE ARTIKEL",
                 "CONTENT": "KONTEN ARTIKEL"
             },
-            "WARNING": {
-                "SUCCESS_POST": "ARTIKEL BERHASIL DIUPLOAD!",
-                "SUCCESS_DELETE": "DATA ARTIKEL BERHASIL DIHAPUS!",
-                "FAILED_POST": "GAGAL MENGUNGGAH DATA ARTIKEL",
-                "FAILED_DELETE": "GAGAL MENGHAPUS DATA ARTIKEL"
+            "COLUMN": {
+                "TITLE": "JUDUL",
+                "ARTICLE_TYPE": "TIPE ARTIKEL",
+                "CREATED_BY": "DIBUAT OLEH",
+                "CREATED_DATE": "TANGGAL PEMBUATAN",
+                "UPDATED_BY": "DIMODIFIKASI OLEH",
+                "UPDATED_DATE": "TANGGAL MODIFIKASI",
+                "ACTION": ""
             },
-            "VALIDATION": {
-                "REQUIRED": "FIELD INI WAJIB DIISI"
+            "WARNING": {
+                "DELETE_ARTICLE": "APAKAH KAMU YAKIN INGIN MENGHAPUS ARTIKEL DENGAN JUDUL"
             }
         },
         "MUSIC": {
@@ -120,7 +130,8 @@
             "ACTION": {
                 "CREATE": "TAMBAH MUSIK",
                 "DELETE": "HAPUS MUSIK",
-                "PREVIEW": "LIHAT MUSIK"
+                "PREVIEW": "LIHAT MUSIK",
+                "SEARCH": "CARI BERDASARKAN JUDUL, PENCIPTA, ATAU GENRE"
             },
             "FIELD": {
                 "TITLE": "JUDUL",

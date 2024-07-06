@@ -11,6 +11,10 @@
             "SIGNIN": "SIGN IN AS",
             "LOGOUT": "LOG OUT"
         },
+        "TABLE": {
+            "ITEMPERPAGE": "SIZE",
+            "OF": "OF"
+        },
         "LOGIN": {
             "TITLE": "LOGIN",
             "SUBTITLE": "WELCOME BACK",
@@ -96,11 +100,14 @@
     },
     "SELF_MANAGEMENT": {
         "ARTICLE": {
-            "TITLE": "ARTICLE PAGE",
+            "TITLE": "ARTICLE",
             "ACTION": {
                 "CREATE": "CREATE ARTICLE",
                 "DELETE": "DELETE ARTICLE",
-                "PREVIEW": "PREVIEW ARTICLE"
+                "PREVIEW": "PREVIEW ARTICLE",
+                "SEARCH": "SEARCH BY TITLE OR ARTICLE TYPE",
+                "ADD_CONTENT": "ADD CONTENT",
+                "DELETE_CONTENT": "DELETE CONTENT"
             },
             "FIELD": {
                 "TITLE": "ARTICLE TITLE",
@@ -108,14 +115,17 @@
                 "ARTICLE_TYPE": "ARTICLE TYPE",
                 "CONTENT": "ARTICLE CONTENT"
             },
-            "WARNING": {
-                "SUCCESS_POST": "ARTICLE HAS BEEN UPLOADED!",
-                "SUCCESS_DELETE": "ARTICLE HAS BEEN DELETED!",
-                "FAILED_POST": "ARTICLE UPLOAD FAILED",
-                "FAILED_DELETE": "ARTICLE DELETION FAILED"
+            "COLUMN": {
+                "TITLE": "TITLE",
+                "ARTICLE_TYPE": "ARTICLE TYPE",
+                "CREATED_BY": "CREATED BY",
+                "CREATED_DATE": "CREATED DATE",
+                "UPDATED_BY": "UPDATED BY",
+                "UPDATED_DATE": "UPDATED DATE",
+                "ACTION": ""
             },
-            "VALIDATION": {
-                "REQUIRED": "THIS FIELD IS REQUIRED"
+            "WARNING": {
+                "DELETE_ARTICLE": "ARE YOU SURE WANT TO DELETE ARTICLE WITH TITLE"
             }
         },
         "MUSIC": {
@@ -123,7 +133,8 @@
             "ACTION": {
                 "CREATE": "CREATE MUSIC",
                 "DELETE": "DELETE MUSIC",
-                "PREVIEW": "PREVIEW MUSIC"
+                "PREVIEW": "PREVIEW MUSIC",
+                "SEARCH": "SEARCH BY TITLE, AUTHOR, OR GENRE"
             },
             "FIELD": {
                 "TITLE": "TITLE",
@@ -154,7 +165,7 @@
                 "MUSIC_FILE": "INPUT YOUR MUSIC MP3/MPEG FILE"
             },
             "WARNING": {
-                "DELETE_MUSIC": "ARE YOU SURE WANT TO DELETE WITH TITLE"
+                "DELETE_MUSIC": "ARE YOU SURE WANT TO DELETE MUSIC WITH TITLE"
             }
         }
     }

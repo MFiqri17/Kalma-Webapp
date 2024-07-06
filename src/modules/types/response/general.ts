@@ -8,6 +8,8 @@ export type DefaultResponse = {
 export type GetQueryResponse = {
 	size: number
 	page: number
+	total_items: number
+	total_pages: number
 }
 
 export type AuthenticationResponse = DefaultResponse & {

@@ -40,16 +40,17 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 			</div>
 		)
 	return (
-		<div className="flex h-screen justify-between bg-gray-50">
+		<div className="flex h-full min-h-screen justify-between bg-gray-50">
 			<DynamicSidebar
 				menuList={
 					userRole.data?.message === 'Admin' ? SidebarData.AdminMenu : SidebarData.PsychologMenu
 				}
-			/>
-			<section className="w-full">
-				<Navbar />
-				<div className="px-5">{children}</div>
-			</section>
+			>
+				<section className="w-full">
+					<Navbar />
+					<div className="p-5">{children}</div>
+				</section>
+			</DynamicSidebar>
 		</div>
 	)
 }

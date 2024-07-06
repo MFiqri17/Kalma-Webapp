@@ -24,8 +24,8 @@ export default function DeleteMusic({
 		mutationFn: (id) => deleteMusicById(id),
 		onSuccess: (data) => {
 			toast.success(data.message)
-			onOpenChange(false)
 			queryClient.invalidateQueries('getMusic')
+			onOpenChange(false)
 		}
 	})
 
@@ -46,7 +46,7 @@ export default function DeleteMusic({
 					isLoading={deleteMusicMutaion.isLoading}
 					onClick={() => deleteMusicMutaion.mutate(data.id)}
 					color="danger"
-					className="w-12 text-white"
+					className="!w-24 text-white"
 				>
 					Submit
 				</Button>

@@ -11,12 +11,12 @@ import {
 import { IoMenuOutline } from 'react-icons/io5'
 import Image from 'next/image'
 import { useLocale } from 'next-intl'
+import { useTranslations } from 'next-intl'
+import { sentenceCase } from 'text-case'
 import { useRouter, usePathname } from '../navigation'
 import { LanguageData } from '../modules/constant/static-data'
 import { useSidebarStore } from '../modules/store'
-import { useTranslations } from 'next-intl'
 import { useGetUserProperty } from '../modules/store'
-import { sentenceCase } from 'text-case'
 import { clearToken } from '../modules/utils/storage'
 
 export default function Navbar() {
@@ -30,7 +30,7 @@ export default function Navbar() {
 	const selectedLocale = LanguageData.find((data) => data.value === locale)
 
 	return (
-		<nav className="flex justify-between border-b-2 border-[#E5E7EB] bg-kalma-grey-500 px-5 py-4">
+		<nav className="sticky top-0 z-30 flex justify-between border-b-2 border-[#E5E7EB] bg-kalma-grey-500 px-5 py-4">
 			<div>
 				<Button isIconOnly variant="light" onClick={toggleSidebar}>
 					<IoMenuOutline className="text-2xl" />

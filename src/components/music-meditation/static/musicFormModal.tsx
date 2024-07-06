@@ -18,6 +18,7 @@ export default function MusicFormModal({
 				base: 'bg-kalma-cream-300 text-black max-h-600'
 			}}
 			isOpen={isOpen}
+			placement="center"
 			size="lg"
 			onOpenChange={onOpenChange}
 			scrollBehavior="inside"

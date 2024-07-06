@@ -44,7 +44,7 @@ export default async function LocaleLayout({
 				className={clsx('min-h-screen bg-background font-sans antialiased', fontGilroy.className)}
 			>
 				<Providers themeProps={{ attribute: 'class', defaultTheme: 'light' }}>
-					<div className="max-w-screen relative flex h-screen flex-col overflow-x-hidden">
+					<div className="relative flex h-screen flex-col">
 						<Toaster position="top-right" reverseOrder={false} />
 						<main className="mx-auto w-full flex-grow">
 							<NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>

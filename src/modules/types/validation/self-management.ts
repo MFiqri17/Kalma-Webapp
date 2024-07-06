@@ -39,13 +39,22 @@ export const CreateArticleSchema = z.object({
 			{
 				message: invalidImageFormatMessage
 			}
-		),
-	article_type: z.string().array().min(1, {
-		message: 'THIS FIELD SHOULD AT LEAST CONTAIN 1 VALUE IN ARRAY'
-	}),
-	content: z.string().array().min(1, {
-		message: 'THIS FIELD SHOULD AT LEAST CONTAIN 1 VALUE IN ARRAY'
-	})
+		)
+		.optional(),
+	article_type: z.array(
+		z
+			.string()
+			.min(1, { message: requiredMessage })
+			.trim()
+			.refine(validateSQLInjection, { message: containsSQLIMessage })
+	),
+	content: z.array(
+		z
+			.string()
+			.min(1, { message: requiredMessage })
+			.trim()
+			.refine(validateSQLInjection, { message: containsSQLIMessage })
+	)
 })
 
 export const CreateMusicSchema = z.object({
