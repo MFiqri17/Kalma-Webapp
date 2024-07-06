@@ -1,0 +1,10 @@
+.rhap_container {
+    background: transparent;
+    .rhap_progress-filled,
+    .rhap_progress-indicator {
+      background-color: #2f9296 !important;
+    }
+    .rhap_volume-bar, .rhap_volume-indicator {
+        background-color: #2f9296;
+      }
+  }

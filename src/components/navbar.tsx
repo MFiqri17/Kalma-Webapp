@@ -8,18 +8,21 @@ import {
 	Select,
 	SelectItem
 } from '@nextui-org/react'
-
 import { IoMenuOutline } from 'react-icons/io5'
 import Image from 'next/image'
 import { useLocale } from 'next-intl'
+import { useTranslations } from 'next-intl'
+import { sentenceCase } from 'text-case'
 import { useRouter, usePathname } from '../navigation'
 import { LanguageData } from '../modules/constant/static-data'
 import { useSidebarStore } from '../modules/store'
 import { useGetUserProperty } from '../modules/store'
+import { clearToken } from '../modules/utils/storage'
 
 export default function Navbar() {
 	const { toggleSidebar } = useSidebarStore()
 	const { data } = useGetUserProperty()
+	const t = useTranslations('GENERAL')
 	const router = useRouter()
 	const pathName = usePathname()
 	const locale = useLocale()
@@ -27,7 +30,7 @@ export default function Navbar() {
 	const selectedLocale = LanguageData.find((data) => data.value === locale)
 
 	return (
-		<nav className="flex justify-between border-b-2 border-[#E5E7EB] bg-kalma-grey-500 px-5 py-4">
+		<nav className="sticky top-0 z-30 flex justify-between border-b-2 border-[#E5E7EB] bg-kalma-grey-500 px-5 py-4">
 			<div>
 				<Button isIconOnly variant="light" onClick={toggleSidebar}>
 					<IoMenuOutline className="text-2xl" />
@@ -73,12 +76,18 @@ export default function Navbar() {
 					</DropdownTrigger>
 					<DropdownMenu aria-label="Profile Actions" variant="flat">
 						<DropdownItem key="profile" className="h-14 gap-2">
-							<p className="font-semibold">Signed in as</p>
+							<p className="font-semibold">{sentenceCase(t('NAVBAR.SIGNIN'))}</p>
 							<p className="font-semibold">{data?.email}</p>
 						</DropdownItem>
-						<DropdownItem key="settings">My Settings</DropdownItem>
-						<DropdownItem key="logout" color="danger">
-							Log Out
+						<DropdownItem
+							onClick={() => {
+								clearToken()
+								router.replace('/login')
+							}}
+							key="logout"
+							color="danger"
+						>
+							{sentenceCase(t('NAVBAR.LOGOUT'))}
 						</DropdownItem>
 					</DropdownMenu>
 				</Dropdown>

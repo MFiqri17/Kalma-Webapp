@@ -1,8 +1,10 @@
 'use client'
 import { useTranslations } from 'next-intl'
-import { capitalCase } from 'text-case'
+import { capitalCase, sentenceCase } from 'text-case'
 import {
 	Button,
+	Card,
+	CircularProgress,
 	Table,
 	TableBody,
 	TableCell,
@@ -11,143 +13,136 @@ import {
 	TableRow,
 	Tooltip
 } from '@nextui-org/react'
-import { MdDelete } from 'react-icons/md'
+import { MdDeleteOutline } from 'react-icons/md'
 import { useCallback } from 'react'
-import { FaEye, FaPlus } from 'react-icons/fa'
-import toast from 'react-hot-toast'
+import { FaRegEye } from 'react-icons/fa'
 import { useQuery } from 'react-query'
-import { AxiosError } from 'axios'
-import { ArticleDataResponse, ArticleResponse } from '@/src/modules/types/response/self-management'
-import { api } from '@/src/modules/utils/api'
-import { Link } from '@/src/navigation'
+import Image from 'next/image'
+import { ArticleDataResponse } from '@/src/modules/types/response/self-management'
 import { getArticleData } from '@/src/modules/endpoints/self-management'
-import { ErrorResponse } from '@/src/modules/types/response/general'
-
-type ArticleTableData = {
-	id: string
-	title: string
-	created_by: string
-	created_date: string
-}
+import useGetDataPayloadState from '@/src/modules/hooks'
+import { ArticleFilter, ArticleTableColumn } from '@/src/modules/constant/static-data'
+import CustomPagination from '@/src/components/table/customPagination'
+import CustomToolbar from '@/src/components/table/customToolbar'
+import { useRouter } from '@/src/navigation'
 
 export default function Article() {
 	const t = useTranslations('SELF_MANAGEMENT.ARTICLE')
-	const u = useTranslations('SELF_MANAGEMENT')
-
-	const headCell = [
-		{
-			key: 'title',
-			label: 'Title'
-		},
-		{
-			key: 'created_by',
-			label: 'Created By'
-		},
-		{
-			key: 'created_date',
-			label: 'Created Date'
-		},
-		{
-			key: 'action',
-			label: ''
-		}
-	]
-
-	const articleData = useQuery<ArticleResponse, AxiosError<ErrorResponse>>({
-		queryKey: ['getUser'],
-		queryFn: getArticleData
+	const router = useRouter()
+	const [dataPayload, setDataPayload] = useGetDataPayloadState({
+		size: 3,
+		page: 1
 	})
-
-	const deleteArticle = async (id: string) => {
-		try {
-			const response = await api.delete(`/article/${id}`)
-			// eslint-disable-next-line no-console
-			console.log(response.data)
-			toast.success(t('WARNING.SUCCESS_DELETE'))
-			getArticleData()
-		} catch (error) {
-			// eslint-disable-next-line no-console
-			console.error('Error delete article data:', error)
-		}
-	}
+	const articleData = useQuery(['getArticle', dataPayload], () => getArticleData(dataPayload))
 
 	const renderCell = useCallback((article: ArticleDataResponse, columnKey: React.Key) => {
-		const cellValue = article[columnKey as keyof ArticleTableData]
+		const cellValue = article[columnKey as keyof ArticleDataResponse]
 
 		switch (columnKey) {
 			case 'title':
-				return <p className="text-sm text-kalma-black-600">{cellValue}</p>
+				return (
+					<div className="block text-left md:flex md:flex-row md:items-center md:justify-start md:space-x-6">
+						<Image
+							className="hidden md:block"
+							src={article.image ?? '/no_image.png'}
+							width={100}
+							height={50}
+							alt={String(cellValue)}
+						/>
+						<p className="truncate text-left text-kalma-black-600">
+							{capitalCase(String(cellValue))}
+						</p>
+					</div>
+				)
 
-			case 'created_by':
-				return <p className="text-sm text-kalma-black-600">{cellValue}</p>
-
-			case 'created_date':
-				return <p className="text-sm text-kalma-black-600">{cellValue}</p>
+			case 'article_type':
+				return <p className="text-kalma-black-600">{article.article_type.join(', ')}</p>
 
 			case 'action':
 				return (
-					<div className="relative flex items-center gap-x-4">
-						<Tooltip content="Details">
-							<Button
-								isIconOnly
-								className="cursor-pointer text-lg text-default-400 active:opacity-50"
-							>
-								<FaEye />
+					<div className="flex justify-end -space-x-6">
+						<Tooltip content={sentenceCase(t('ACTION.PREVIEW'))}>
+							<Button variant="light">
+								<FaRegEye className="text-base" />
 							</Button>
 						</Tooltip>
-						<Tooltip color="danger" content="Delete">
-							<Button
-								isIconOnly
-								className="cursor-pointer text-lg text-danger active:opacity-50"
-								onClick={() => deleteArticle(article.id)}
-							>
-								<MdDelete />
+						<Tooltip color="danger" content={sentenceCase(t('ACTION.DELETE'))}>
+							<Button variant="light">
+								<MdDeleteOutline className="text-base text-red-500" />
 							</Button>
 						</Tooltip>
 					</div>
 				)
 			default:
-				return cellValue
+				return <p className="text-kalma-black-600">{capitalCase(String(cellValue))}</p>
 		}
 	}, [])
 
-	const articleItems = Array.isArray(articleData.data?.data) ? articleData.data.data : []
-
 	return (
-		<div className="flex flex-col p-6">
-			<div className="flex items-center justify-between pb-6">
-				<h1 className="mb-6 text-2xl text-kalma-black-600">{capitalCase(t('TITLE'))}</h1>
-				<Button
-					className="rounded-xl bg-[#2F9296] py-4 text-lg font-semibold text-white hover:bg-[#2F9296] hover:opacity-80 focus:bg-[#2F9296]"
-					startContent={<FaPlus />}
-				>
-					<Link href="/article/add">{capitalCase(u('BUTTON_ACTION.ADD_ARTICLE'))}</Link>
-				</Button>
-			</div>
-			<Table
-				classNames={{
-					wrapper: 'bg-white',
-					table: 'text-kalma-black-900 text-base bg-white'
-				}}
+		<div className="flex flex-col">
+			<h1 className="mb-6 ml-4 text-xl font-semibold text-kalma-black-900">
+				{capitalCase(t('TITLE'))}
+			</h1>
+			<Card
+				className={
+					'flex h-full rounded-xl bg-white p-4 shadow-sm drop-shadow-md md:p-6 xl:rounded-3xl'
+				}
 			>
-				<TableHeader>
-					{headCell.map((column) => (
-						<TableColumn
-							key={String(column.key)}
-							className="bg-kalma-grey-200 text-base font-bold text-kalma-black-900"
+				<CustomToolbar
+					filterValue={ArticleFilter}
+					dataPayload={dataPayload}
+					setDataPayload={setDataPayload}
+					searchPlaceholder={t('ACTION.SEARCH')}
+					createText={t('ACTION.CREATE')}
+					onCreate={() => router.push('article/create')}
+				/>
+				{articleData.isLoading || articleData.isFetching ? (
+					<div className="mt-10 flex justify-center">
+						<CircularProgress classNames={{ label: 'text-semibold' }} label="Loading..." />
+					</div>
+				) : (
+					<section>
+						<Table
+							classNames={{
+								base: 'my-5',
+								wrapper: 'max-h-[360px] '
+							}}
+							isStriped
+							isHeaderSticky
 						>
-							{column.label}
-						</TableColumn>
-					))}
-				</TableHeader>
-				<TableBody emptyContent={'No rows to display.'} items={articleItems}>
-					{(item) => (
-						<TableRow key={item.id}>
-							{(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
-						</TableRow>
-					)}
-				</TableBody>
-			</Table>
+							<TableHeader>
+								{ArticleTableColumn.map((column) => (
+									<TableColumn
+										key={String(column.key)}
+										className="bg-kalma-grey-200 text-base font-bold text-kalma-black-900"
+									>
+										{capitalCase(t(`COLUMN.${column.label_path}`))}
+									</TableColumn>
+								))}
+							</TableHeader>
+							<TableBody
+								isLoading={articleData.isLoading || articleData.isFetching}
+								emptyContent={'No rows to display.'}
+								items={articleData.data?.data}
+							>
+								{(item) => (
+									<TableRow key={item.id} className="text-sm md:text-base">
+										{(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+									</TableRow>
+								)}
+							</TableBody>
+						</Table>
+						{articleData.data && articleData?.data?.total_pages > 0 ? (
+							<CustomPagination
+								totalData={articleData.data.total_items}
+								totalPages={articleData?.data?.total_pages}
+								dataPayload={dataPayload}
+								setDataPayload={setDataPayload}
+							/>
+						) : null}
+					</section>
+				)}
+			</Card>
 		</div>
 	)
 }

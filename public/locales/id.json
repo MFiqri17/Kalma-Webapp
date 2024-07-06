@@ -7,6 +7,14 @@
             "USER": "MANAJEMEN USER",
             "JOURNAL": "JURNAL USER"
         },
+        "NAVBAR": {
+            "SIGNIN": "MASUK SEBAGAI",
+            "LOGOUT": "KELUAR"
+        },
+        "TABLE": {
+            "ITEMPERPAGE": "UKURAN",
+            "OF": "DARI"
+        },
         "LOGIN": {
             "TITLE": "LOGIN",
             "SUBTITLE": "SELAMAT DATANG KEMBALI",
@@ -70,7 +78,8 @@
             "INVALIDNUMBER": "FIELD INI HARUS BERUPA TIPE INTEGER POSITIF",
             "ALPHABETCHARONLY": "FIELD INI HANYA BOLEH DIISI DENGAN KARAKTER ALFABET DAN SPASI",
             "MAXIMUMIMAGESIZE": "UKURAN GAMBAR HARUS TIDAK BOLEH LEBIH DARI 1MB",
-            "INVALIDIMAGEFORMAT": "HANYA FORMAT FILE GAMBAR YANG DIDUKUNG"
+            "INVALIDIMAGEFORMAT": "HANYA FORMAT FILE GAMBAR YANG DIDUKUNG",
+            "INVALIDMUSICFORMAT": "HANYA FORMAT FILE AUDIO YANG DIDUKUNG"
         }
     },
     "HOME": {
@@ -88,44 +97,73 @@
     },
     "SELF_MANAGEMENT": {
         "ARTICLE": {
-            "TITLE": "HALAMAN ARTIKEL",
+            "TITLE": "ARTIKEL",
+            "ACTION": {
+                "CREATE": "TAMBAH ARTIKEL",
+                "DELETE": "HAPUS ARTIKEL",
+                "PREVIEW": "LIHAT ARTIKEL",
+                "SEARCH": "CARI BERDASARKAN JUDUL ATAU TIPE ARTIKEL",
+                "ADD_CONTENT": "TAMBAH KONTEN",
+                "DELETE_CONTENT": "HAPUS KONTEN"
+            },
             "FIELD": {
                 "TITLE": "JUDUL ARTIKEL",
                 "IMAGE": "FOTO BANNER",
                 "ARTICLE_TYPE": "TIPE ARTIKEL",
                 "CONTENT": "KONTEN ARTIKEL"
             },
-            "WARNING": {
-                "SUCCESS_POST": "ARTIKEL BERHASIL DIUPLOAD!",
-                "SUCCESS_DELETE": "DATA ARTIKEL BERHASIL DIHAPUS!",
-                "FAILED_POST": "GAGAL MENGUNGGAH DATA ARTIKEL",
-                "FAILED_DELETE": "GAGAL MENGHAPUS DATA ARTIKEL"
+            "COLUMN": {
+                "TITLE": "JUDUL",
+                "ARTICLE_TYPE": "TIPE ARTIKEL",
+                "CREATED_BY": "DIBUAT OLEH",
+                "CREATED_DATE": "TANGGAL PEMBUATAN",
+                "UPDATED_BY": "DIMODIFIKASI OLEH",
+                "UPDATED_DATE": "TANGGAL MODIFIKASI",
+                "ACTION": ""
             },
-            "VALIDATION": {
-                "REQUIRED": "FIELD INI WAJIB DIISI"
+            "WARNING": {
+                "DELETE_ARTICLE": "APAKAH KAMU YAKIN INGIN MENGHAPUS ARTIKEL DENGAN JUDUL"
             }
         },
         "MUSIC": {
-            "TITLE": "HALAMAN MUSIK",
+            "TITLE": "MEDITASI MUSIK",
+            "ACTION": {
+                "CREATE": "TAMBAH MUSIK",
+                "DELETE": "HAPUS MUSIK",
+                "PREVIEW": "LIHAT MUSIK",
+                "SEARCH": "CARI BERDASARKAN JUDUL, PENCIPTA, ATAU GENRE"
+            },
             "FIELD": {
-                "TITLE": "JUDUL MUSIK",
-                "GENRE": "GENRE MUSIK",
-                "AUTHOR": "PENCIPTA/PERILIS LAGU",
-                "IMAGE": "GAMBAR MUSIK",
-                "MUSIC_LINK": "LINK MP3 MUSIK",
+                "TITLE": "JUDUL",
+                "GENRE": "GENRE",
+                "AUTHOR": "PENCIPTA/PERILIS",
+                "IMAGE": "GAMBAR",
+                "MUSIC SOURCE": "SUMBER MUSIK",
+                "MUSIC_LINK": "LINK MUSIK",
                 "MUSIC_FILE": "FILE MUSIK"
             },
+            "COLUMN": {
+                "TITLE": "JUDUL",
+                "GENRE": "GENRE",
+                "AUTHOR": "PENCIPTA",
+                "CREATED_BY": "DIBUAT OLEH",
+                "CREATED_DATE": "TANGGAL PEMBUATAN",
+                "UPDATED_BY": "DIMODIFIKASI OLEH",
+                "UPDATED_DATE": "TANGGAL MODIFIKASI",
+                "ACTION": ""
+            },
+            "PLACEHOLDER": {
+                "TITLE": "MASUKKKAN JUDUL MUSIK",
+                "GENRE": "MASUKKAN GENRE MUSIK",
+                "AUTHOR": "MASUKKAN PENCIPTA MUSIK",
+                "IMAGE": "MASUKKAN GAMBAR MUSIK",
+                "MUSIC SOURCE": "PILIH SUMBER MUSIK MU",
+                "MUSIC_LINK": "MASUKKAN LINK MP3/MPEG MUSIK",
+                "MUSIC_FILE": "MASUKKAN FILE MP3/MPEG MUSIK"
+            },
             "WARNING": {
-                "SUCCESS_POST": "MUSIK BERHASIL DIUPLOAD!",
-                "SUCCESS_DELETE": "DATA MUSIK BERHASIL DIHAPUS!",
-                "FAILED_POST": "GAGAL MENGUNGGAH DATA MUSIK",
-                "FAILED_DELETE": "GAGAL MENGHAPUS DATA MUSIK"
+                "DELETE_MUSIC": "APAKAH KAMU YAKIN INGIN MENGHAPUS MUSIK DENGAN JUDUL"
             }
-        },
-        "BUTTON_ACTION": {
-            "SUBMIT": "SUBMIT",
-            "ADD_ARTICLE": "TAMBAH ARTIKEL",
-            "ADD_MUSIC": "TAMBAH MUSIK"
         }
     }
 }

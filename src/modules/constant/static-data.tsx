@@ -69,42 +69,6 @@ export const RegisterData = [
 	}
 ]
 
-export const CreateArticleData = [
-	{
-		id: uniqueId(),
-		label: 'ARTICLE.FIELD.TITLE',
-		name: 'title',
-		type: 'text'
-	},
-	{
-		id: uniqueId(),
-		label: 'ARTICLE.FIELD.IMAGE',
-		name: 'image',
-		type: 'file'
-	},
-	{
-		id: uniqueId(),
-		label: 'ARTICLE.FIELD.ARTICLE_TYPE',
-		name: 'article_type',
-		type: 'text'
-	},
-	{
-		id: uniqueId(),
-		label: 'ARTICLE.FIELD.CONTENT',
-		name: 'content',
-		type: 'text'
-	}
-]
-
-export const UserManagamentTableColumn = [
-	{ id: uniqueId(), name_path: 'ID' },
-	{ id: uniqueId(), name_path: 'NAME' },
-	{ id: uniqueId(), name_path: 'AGE' },
-	{ id: uniqueId(), name_path: 'APPROVED' },
-	{ id: uniqueId(), name_path: 'LAST_LOGGED_IN' },
-	{ id: uniqueId(), name_path: 'CREATED DATE' }
-]
-
 export const SidebarData = {
 	PsychologMenu: [
 		{
@@ -159,3 +123,158 @@ export const SidebarData = {
 		}
 	]
 }
+
+export const ListMusicImages = [
+	{
+		name: 'Lake',
+		url: 'https://res.cloudinary.com/dol4595k7/image/upload/v1718980748/lake_eliscl.jpg'
+	},
+	{
+		name: 'Night Sky',
+		url: 'https://res.cloudinary.com/dol4595k7/image/upload/v1718980749/night_sky_gp7ifv.jpg'
+	},
+	{
+		name: 'Mountain',
+		url: 'https://res.cloudinary.com/dol4595k7/image/upload/v1718980748/mountain_hewhlv.jpg'
+	},
+	{
+		name: 'River',
+		url: 'https://res.cloudinary.com/dol4595k7/image/upload/v1718980748/river_kmqgil.jpg'
+	},
+	{
+		name: 'Beach',
+		url: 'https://res.cloudinary.com/dol4595k7/image/upload/v1718980748/beach_zjvnsp.jpg'
+	},
+	{
+		name: 'Forest',
+		url: 'https://res.cloudinary.com/dol4595k7/image/upload/v1718980747/forest_kvt6me.jpg'
+	}
+]
+
+export const ListMusicGenre = ['nature', 'instrumental']
+export const ListArticleType = [
+	'mental health',
+	'youth mental health',
+	'depression article',
+	'stress article',
+	'anxiety article',
+	'adult mental health',
+	'mental illness',
+	'dare to care'
+]
+
+export const MusicMeditationTableColumn = [
+	{
+		key: 'title',
+		label_path: 'TITLE'
+	},
+	{
+		key: 'genre',
+		label_path: 'GENRE'
+	},
+	{
+		key: 'author',
+		label_path: 'AUTHOR'
+	},
+	{
+		key: 'created_by',
+		label_path: 'CREATED_BY'
+	},
+	{
+		key: 'created_date',
+		label_path: 'CREATED_DATE'
+	},
+	{
+		key: 'action',
+		label_path: 'ACTION'
+	}
+]
+
+export const ArticleTableColumn = [
+	{
+		key: 'title',
+		label_path: 'TITLE'
+	},
+	{
+		key: 'article_type',
+		label_path: 'ARTICLE_TYPE'
+	},
+	{
+		key: 'created_by',
+		label_path: 'CREATED_BY'
+	},
+	{
+		key: 'created_date',
+		label_path: 'CREATED_DATE'
+	},
+	{
+		key: 'action',
+		label_path: 'ACTION'
+	}
+]
+
+export const MusicFilter = [
+	{
+		name: 'All',
+		value: 'all',
+		column: 'all'
+	},
+	{
+		name: 'Nature',
+		value: 'nature',
+		column: 'genre'
+	},
+	{
+		name: 'Instrumental',
+		value: 'instrumental',
+		column: 'genre'
+	}
+]
+
+export const ArticleFilter = [
+	{
+		name: 'All',
+		value: 'all',
+		column: 'all'
+	},
+	{
+		name: 'Mental Health',
+		value: 'mental health',
+		column: 'article_type'
+	},
+	{
+		name: 'Youth Mental Health',
+		value: 'youth mental health',
+		column: 'article_type'
+	},
+	{
+		name: 'Depression Article',
+		value: 'depression article',
+		column: 'article_type'
+	},
+	{
+		name: 'Stress Article',
+		value: 'stress article',
+		column: 'article_type'
+	},
+	{
+		name: 'Anxiety Article',
+		value: 'anxiety article',
+		column: 'article_type'
+	},
+	{
+		name: 'Adult Mental Health',
+		value: 'adult mental health',
+		column: 'article_type'
+	},
+	{
+		name: 'Mental Illness',
+		value: 'mental illness',
+		column: 'article_type'
+	},
+	{
+		name: 'Dare to Care',
+		value: 'dare to care',
+		column: 'article_type'
+	}
+]

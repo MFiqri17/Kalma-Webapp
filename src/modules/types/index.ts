@@ -30,6 +30,12 @@ export type SidebarMenu = {
 	icon: JSX.Element
 }
 
+export type FilterValue = {
+	value: string
+	name: string
+	column: string
+}
+
 export type SidebarState = {
 	isOpen: boolean
 	setIsOpen: (isOpen: boolean) => void

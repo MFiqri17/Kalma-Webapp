@@ -17,7 +17,13 @@ export type RefreshTokenPayload = {
 	refresh_token: string
 }
 
-export type GetData = {
-	size: number
-	page: number
+export type GetDataPayload = {
+	size?: number
+	page?: number
+	sort_value?: string
+	sort_column?: string
+	search_value?: string
+	search_column?: string
+	filter_value?: string
+	filter_column?: string
 }

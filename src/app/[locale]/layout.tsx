@@ -1,4 +1,4 @@
-import '../../styles/globals.css'
+import '../../styles/globals.scss'
 import { Metadata, Viewport } from 'next'
 import { getMessages } from 'next-intl/server'
 import clsx from 'clsx'

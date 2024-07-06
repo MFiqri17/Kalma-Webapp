@@ -7,6 +7,14 @@
             "USER": "USER MANAGEMENT",
             "JOURNAL": "USERS JOURNAL"
         },
+        "NAVBAR": {
+            "SIGNIN": "SIGN IN AS",
+            "LOGOUT": "LOG OUT"
+        },
+        "TABLE": {
+            "ITEMPERPAGE": "SIZE",
+            "OF": "OF"
+        },
         "LOGIN": {
             "TITLE": "LOGIN",
             "SUBTITLE": "WELCOME BACK",
@@ -73,7 +81,8 @@
             "INVALIDNUMBER": "THIS FIELD SHOULD BE POSITIVE INTEGER TYPE",
             "ALPHABETCHARONLY": "THIS FIELD CAN ONLY CONTAIN ALPHABETIC CHARACTERS AND SPACES",
             "MAXIMUMIMAGESIZE": "IMAGE SIZE MUST BE LESS THAN 1MB",
-            "INVALIDIMAGEFORMAT": "ONLY IMAGE FILE FORMAT IS SUPPORTED"
+            "INVALIDIMAGEFORMAT": "ONLY IMAGE FILE FORMAT IS SUPPORTED",
+            "INVALIDMUSICFORMAT": "ONLY AUDIO FILE FORMAT IS SUPPORTED"
         }
     },
     "HOME": {
@@ -91,44 +100,73 @@
     },
     "SELF_MANAGEMENT": {
         "ARTICLE": {
-            "TITLE": "ARTICLE PAGE",
+            "TITLE": "ARTICLE",
+            "ACTION": {
+                "CREATE": "CREATE ARTICLE",
+                "DELETE": "DELETE ARTICLE",
+                "PREVIEW": "PREVIEW ARTICLE",
+                "SEARCH": "SEARCH BY TITLE OR ARTICLE TYPE",
+                "ADD_CONTENT": "ADD CONTENT",
+                "DELETE_CONTENT": "DELETE CONTENT"
+            },
             "FIELD": {
                 "TITLE": "ARTICLE TITLE",
                 "IMAGE": "BANNER IMAGE",
                 "ARTICLE_TYPE": "ARTICLE TYPE",
                 "CONTENT": "ARTICLE CONTENT"
             },
-            "WARNING": {
-                "SUCCESS_POST": "ARTICLE HAS BEEN UPLOADED!",
-                "SUCCESS_DELETE": "ARTICLE HAS BEEN DELETED!",
-                "FAILED_POST": "ARTICLE UPLOAD FAILED",
-                "FAILED_DELETE": "ARTICLE DELETION FAILED"
+            "COLUMN": {
+                "TITLE": "TITLE",
+                "ARTICLE_TYPE": "ARTICLE TYPE",
+                "CREATED_BY": "CREATED BY",
+                "CREATED_DATE": "CREATED DATE",
+                "UPDATED_BY": "UPDATED BY",
+                "UPDATED_DATE": "UPDATED DATE",
+                "ACTION": ""
             },
-            "VALIDATION": {
-                "REQUIRED": "THIS FIELD IS REQUIRED"
+            "WARNING": {
+                "DELETE_ARTICLE": "ARE YOU SURE WANT TO DELETE ARTICLE WITH TITLE"
             }
         },
         "MUSIC": {
-            "TITLE": "MUSIC PAGE",
+            "TITLE": "MUSIC MEDITATION",
+            "ACTION": {
+                "CREATE": "CREATE MUSIC",
+                "DELETE": "DELETE MUSIC",
+                "PREVIEW": "PREVIEW MUSIC",
+                "SEARCH": "SEARCH BY TITLE, AUTHOR, OR GENRE"
+            },
             "FIELD": {
-                "TITLE": "MUSIC TITLE",
-                "GENRE": "MUSIC GENRE",
-                "AUTHOR": "MUSIC AUTHOR",
-                "IMAGE": "MUSIC PICTURE",
-                "MUSIC_LINK": "MUSIC MP3 LINK",
+                "TITLE": "TITLE",
+                "GENRE": "GENRE",
+                "AUTHOR": "AUTHOR",
+                "IMAGE": "PICTURE",
+                "MUSIC SOURCE": "MUSIC SOURCE",
+                "MUSIC_LINK": "MUSIC LINK",
                 "MUSIC_FILE": "MUSIC FILE"
             },
+            "COLUMN": {
+                "TITLE": "TITLE",
+                "GENRE": "GENRE",
+                "AUTHOR": "AUTHOR",
+                "CREATED_BY": "CREATED BY",
+                "CREATED_DATE": "CREATED DATE",
+                "UPDATED_BY": "UPDATED BY",
+                "UPDATED_DATE": "UPDATED DATE",
+                "ACTION": ""
+            },
+            "PLACEHOLDER": {
+                "TITLE": "INPUT YOUR MUSIC TITLE",
+                "GENRE": "INPUT YOUR MUSIC GENRE",
+                "AUTHOR": "INPUT YOUR MUSIC AUTHOR",
+                "IMAGE": "INPUT YOUR MUSIC PICTURE",
+                "MUSIC SOURCE": "SELECT YOUR MUSIC SOURCE",
+                "MUSIC_LINK": "INPUT YOUR MUSIC MP3/MPEG LINK",
+                "MUSIC_FILE": "INPUT YOUR MUSIC MP3/MPEG FILE"
+            },
             "WARNING": {
-                "SUCCESS_POST": "MUSIC HAS BEEN UPLOADED!",
-                "SUCCESS_DELETE": "MUSIC HAS BEEN DELETED!",
-                "FAILED_POST": "MUSIC UPLOAD FAILED",
-                "FAILED_DELETE": "MUSIC DELETION FAILED"
+                "DELETE_MUSIC": "ARE YOU SURE WANT TO DELETE MUSIC WITH TITLE"
             }
-        },
-        "BUTTON_ACTION": {
-            "SUBMIT": "SUBMIT",
-            "ADD_ARTICLE": "ADD ARTICLE",
-            "ADD_MUSIC": "ADD MUSIC"
         }
     }
 }

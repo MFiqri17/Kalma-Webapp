@@ -5,6 +5,13 @@ export type DefaultResponse = {
 	message: string
 }
 
+export type GetQueryResponse = {
+	size: number
+	page: number
+	total_items: number
+	total_pages: number
+}
+
 export type AuthenticationResponse = DefaultResponse & {
 	access_token: string
 	refresh_token: string

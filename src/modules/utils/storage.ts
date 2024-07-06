@@ -28,6 +28,11 @@ export const getToken = (): TokenProps => {
 	return JSON.parse(decodeURIComponent(getCookie('token')!))
 }
 
+export const clearToken = () => {
+	if (isTokenSessionAvailable()) return deleteTokenSession()
+	return deleteTokenCookie()
+}
+
 export const isLoggedIn = () => {
 	const credentials = isTokenCookieAvailable() || isTokenSessionAvailable()
 	return credentials

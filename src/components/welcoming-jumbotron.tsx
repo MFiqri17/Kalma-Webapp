@@ -8,7 +8,7 @@ export default function WelcomingJumbotron() {
 	const { data } = useGetUserProperty()
 
 	return (
-		<div className="relative mt-5 h-72">
+		<div className="relative h-72">
 			<Image
 				fill
 				priority
