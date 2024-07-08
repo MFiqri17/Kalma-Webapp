@@ -1,3 +1,5 @@
+import ComingSoon from '@/src/components/comingSoon'
+
 export default function UserManagement() {
-	return <div>hai sayang from user management</div>
+	return <ComingSoon />
 }
