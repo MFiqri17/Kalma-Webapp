@@ -28,9 +28,9 @@ export default function CustomToolbar({
 	useEffect(() => {
 		if (selectedFilter !== '' && selectedFilter !== 'all') {
 			const filterMap = filterValue.find((item) => item.value === selectedFilter)
-			setDataPayload({ filter_column: filterMap?.column, filter_value: filterMap?.value })
+			setDataPayload({ filter_column: filterMap?.column, filter_value: filterMap?.value, page: 1 })
 		} else if (selectedFilter === 'all') {
-			setDataPayload({}, 'all')
+			setDataPayload({ page: 1 }, 'all')
 		}
 	}, [selectedFilter])
 

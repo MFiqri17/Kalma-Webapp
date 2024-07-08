@@ -1,3 +1,5 @@
-export default function Article() {
-	return <div>hai sayang from user journal</div>
+import ComingSoon from '@/src/components/comingSoon'
+
+export default function UsersJournal() {
+	return <ComingSoon />
 }
