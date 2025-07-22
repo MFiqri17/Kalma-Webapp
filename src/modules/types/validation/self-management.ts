@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import { validateSQLInjection } from './general'
 
+
 const requiredMessage = 'REQUIRED'
 const containsSQLIMessage = 'SQLINJECTION'
 const maximumImageSizeImage = 'MAXIMUMIMAGESIZE'
